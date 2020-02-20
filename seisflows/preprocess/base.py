@@ -56,6 +56,10 @@ class base(object):
         # data filtering option
         if 'FILTER' not in PAR:
             setattr(PAR, 'FILTER', None)
+        
+        # # apply trace downsampling
+        # if 'DOWNSAMPLE_FACTOR' not in PAR:
+        #     setattr(PAR, 'DOWNSAMPLE_FACTOR', 1.)
 
         # assertions
         if PAR.FORMAT not in dir(readers):
@@ -106,6 +110,8 @@ class base(object):
             syn = self.apply_filter(syn)
             syn = self.apply_mute(syn)
             syn = self.apply_normalize(syn)
+            # syn = self.apply_downsampling(syn)
+
 
             if PAR.MISFIT:
                 self.write_residuals(path, syn, obs)
@@ -313,6 +319,12 @@ class base(object):
                 raise ParameterError('FREQ')
             assert 0 <= PAR.FREQ < np.inf
 
+    # def apply_downsampling(self, traces):
+    #     for tr in traces:
+    #         tr = tr.decimate(factor = PAR.DOWNSAMPLE_FACTOR, strict_length = False)
+
+    #     return traces
+
     def check_mute(self):
         """ Checks mute settings
         """
@@ -383,8 +395,8 @@ class base(object):
             ry = []
             rz = []
             for trace in traces:
-                rx += [trace.stats.su.trace_header.group_coordinate_x]
-                ry += [trace.stats.su.trace_header.group_coordinate_y]
+                rx += [trace.stats.segy.trace_header.group_coordinate_x]
+                ry += [trace.stats.segy.trace_header.group_coordinate_y]
                 rz += [0.]
             return rx, ry, rz
 
@@ -397,8 +409,8 @@ class base(object):
             sy = []
             sz = []
             for trace in traces:
-                sx += [trace.stats.su.trace_header.source_coordinate_x]
-                sy += [trace.stats.su.trace_header.source_coordinate_y]
+                sx += [trace.stats.segy.trace_header.source_coordinate_x]
+                sy += [trace.stats.segy.trace_header.source_coordinate_y]
                 sz += [0.]
             return sx, sy, sz
 

@@ -208,7 +208,7 @@ def _get_offsets(stream):
     """
     nr = len(stream)
     offsets = np.zeros(nr)
-    scalco = stream[0].stats.su.trace_header.scalar_to_be_applied_to_all_coordinates
+    scalco = stream[0].stats.segy.trace_header.scalar_to_be_applied_to_all_coordinates
 
     # set scale to km
     if scalco == 0:
@@ -217,8 +217,8 @@ def _get_offsets(stream):
         scalco = 1.0e-3 / scalco
 
     for i, tr in enumerate(stream):
-        offsets[i] = (tr.stats.su.trace_header.group_coordinate_x -
-                      tr.stats.su.trace_header.source_coordinate_x) * scalco
+        offsets[i] = (tr.stats.segy.trace_header.group_coordinate_x -
+                      tr.stats.segy.trace_header.source_coordinate_x) * scalco
     return offsets
 
 

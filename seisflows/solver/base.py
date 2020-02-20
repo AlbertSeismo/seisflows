@@ -76,11 +76,15 @@ class base(object):
 
     assert 'MATERIALS' in PAR
     assert 'DENSITY' in PAR
+    assert 'VP' in PAR
+    assert 'VS' in PAR
 
     parameters = []
     if PAR.MATERIALS == 'Elastic':
-        parameters += ['vp']
-        parameters += ['vs']
+        if PAR.VS == 'Constant':
+            parameters += ['vp']
+        if PAR.VP == 'Constant':
+            parameters += ['vs']
     elif PAR.MATERIALS == 'Acoustic':
         parameters += ['vp']
 
@@ -150,7 +154,6 @@ class base(object):
         if PATH.DATA:
             # copy user supplied data
             self.initialize_solver_directories()
-
             src = glob(PATH.DATA + '/' + self.source_name + '/' + '*')
             dst = 'traces/obs/'
             unix.cp(src, dst)
@@ -160,13 +163,13 @@ class base(object):
             self.generate_data(
                 model_path=PATH.MODEL_TRUE,
                 model_name='model_true',
-                model_type='gll')
+                model_type='su')
 
         # prepare initial model mesh
         self.generate_mesh(
             model_path=PATH.MODEL_INIT,
             model_name='model_init',
-            model_type='gll')
+            model_type='su')
 
         # Adjoint traces (in scratch/solver/source_name/traces/adj)are
         # initialized below by writing zeros for all channels (even the ones
@@ -368,7 +371,7 @@ class base(object):
         # Apply smoothing operator
         unix.cd(self.cwd)
         for name in parameters or self.parameters:
-            print ' smoothing', name
+            print 'Smoothing ', name
             call_solver(
                 system.mpiexec(),
                 PATH.SPECFEM_BIN + '/' + 'xsmooth_sem '
@@ -376,8 +379,13 @@ class base(object):
                 + str(span) + ' '
                 + name + '_kernel' + ' '
                 + input_path + '/ '
-                + output_path + '/ ',
+                + output_path + '/ .false.',
                 output='/dev/null')
+    #Note the usage of Xsmooth_sem
+    #
+    #mpirun -np NPROC bin/xsmooth_sem SIGMA_H SIGMA_V KERNEL_NAME INPUT_DIR OUPUT_DIR GPU_MODE
+    #
+    #See xsmooth_sem.F90
 
         print ''
 

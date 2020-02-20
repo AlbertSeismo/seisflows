@@ -257,4 +257,4 @@ class specfem2d(custom_import('solver', 'base')):
     # which lacked a smoothing utility
     # if not exists(PATH.SPECFEM_BIN+'/'+'xsmooth_sem'):
     #    smooth = staticmethod(smooth_legacy)
-    smooth = staticmethod(smooth_legacy)
+    #smooth = staticmethod(smooth_legacy)

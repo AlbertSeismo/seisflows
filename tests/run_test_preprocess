@@ -9,8 +9,8 @@ WD="$PWD/setup/test_preprocess"
 
 
 # adjust paths
-sed -i "s:^DATA.*=.*:DATA = '$WD/data.su':" $WD/paths
-sed -i "s:^SYNTHETICS.*=.*:SYNTHETICS = '$WD/synthetics.su':" $WD/paths
+sed -i "" "s:^DATA.*=.*:DATA = '$WD/data.su':" $WD/paths
+sed -i "" "s:^SYNTHETICS.*=.*:SYNTHETICS = '$WD/synthetics.su':" $WD/paths
 
 
 # run tests

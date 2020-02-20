@@ -1,6 +1,10 @@
+.gitignore
+.vscode
 *.exe
 *.pyc
 *.swp
-doc/_build
-parameters*c
-paths*c
+docs/
+tests/
+project/
+auxiliary/
+scripts/

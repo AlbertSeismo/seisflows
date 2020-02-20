@@ -102,8 +102,10 @@ def writeBigSuFile(stream, path, byteorder='<'):
     from obspy.io.segy.core import SUFile
     from obspy.io.segy.segy import SEGYWritingError
     from obspy.io.segy.segy import SEGYTrace
+    from obspy.io.segy.segy import SEGYTraceHeader
     from obspy.io.segy.header import TRACE_HEADER_FORMAT
     from obspy.io.segy.header import DATA_SAMPLE_FORMAT_PACK_FUNCTIONS
+    
 
     dummy_npts = 9999
     su_file = SUFile()
@@ -113,11 +115,11 @@ def writeBigSuFile(stream, path, byteorder='<'):
         new_trace = SEGYTrace()
         new_trace.data = trace.data
         # Use header saved in stats if one exists.
-        if hasattr(trace.stats, 'su') and \
-           hasattr(trace.stats.su, 'trace_header'):
-            this_trace_header = trace.stats.su.trace_header
+        if hasattr(trace.stats, 'segy') and \
+           hasattr(trace.stats.segy, 'trace_header'):
+            this_trace_header = trace.stats.segy.trace_header
         else:
-            this_trace_header = AttribDict()
+            this_trace_header = SEGYTraceHeader()
         new_trace_header = new_trace.header
         # Again loop over all field of the trace header and if they exists, set
         # them. Ignore all additional attributes.

@@ -88,7 +88,7 @@ def readBigSuFile(nameOfFile, nt, format='SU', byteorder='<'):
         the number of samples (as signed int, see:
         http://lists.swapbytes.de/archives/obspy-users/2017-March/002359.html).
         Even if it's an old format it's still extremely stupid.
-        This proove the lack of vision the designer of this format had at that
+        This prove the lack of vision the designer of this format had at that
         time. They could have chosen 8 bytes or 16 bytes it was no big deal...
         They've cost me a day's work.
         But let us forget about the past. This limits the size of the
@@ -162,18 +162,18 @@ def readBigSuFile(nameOfFile, nt, format='SU', byteorder='<'):
         trace = Trace()
         stream.append(trace)
         trace.data = data
-        trace.stats.su = AttribDict()
+        trace.stats.segy = AttribDict()
 
         # Add the trace header as a new lazy attrib dictionary.
         header = LazyTraceHeaderAttribDict(headers[idx].unpacked_header,
                                            endian)
-        trace.stats.su.trace_header = header
+        trace.stats.segy.trace_header = header
         # Also set the endianness.
-        trace.stats.su.endian = endian
+        trace.stats.segy.endian = endian
         # The sampling rate should be set for every trace. It is a sample
         # interval in microseconds. The only sanity check is that is should be
         # larger than 0.
-        tr_header = trace.stats.su.trace_header
+        tr_header = trace.stats.segy.trace_header
         if tr_header.sample_interval_in_ms_for_this_trace > 0:
             trace.stats.delta = \
                 float(headers[idx].sample_interval_in_ms_for_this_trace) / 1E6

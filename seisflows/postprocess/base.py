@@ -19,6 +19,7 @@ from seisflows.config import ParameterError
 
 PAR = sys.modules['seisflows_parameters']
 PATH = sys.modules['seisflows_paths']
+#optimize = sys.modules['seisflows_optimize']
 
 system = sys.modules['seisflows_system']
 solver = sys.modules['seisflows_solver']
@@ -61,6 +62,8 @@ class base(object):
         # run through the HPC system interface; processing does not involve
         # embarassingly parallel tasks, we use system.run_single instead of
         # system.run
+
+        #Here's where run smooth process.
         system.run_single('postprocess', 'process_kernels',
                           path=path+'/kernels',
                           parameters=solver.parameters)
@@ -109,13 +112,18 @@ class base(object):
         """
         if not exists(path):
             raise Exception
-
+        
         if PAR.SMOOTH > 0:
             solver.combine(
                    input_path=path,
                    output_path=path+'/'+'sum_nosmooth',
                    parameters=parameters)
-
+            #if optimize.iter == 1:
+            for PROC in range(PAR.NPROC):
+                unix.cp(src = PATH.MODEL_INIT + '/proc%06d_NSPEC_ibool.bin' % PROC, dst = path + '/' + 'sum_nosmooth'+ '/proc%06d_NSPEC_ibool.bin' % PROC)
+                unix.cp(src = PATH.MODEL_INIT + '/proc%06d_jacobian.bin' % PROC, dst = path + '/' + 'sum_nosmooth'+ '/proc%06d_jacobian.bin' % PROC)
+                unix.cp(src = PATH.MODEL_INIT + '/proc%06d_x.bin' % PROC, dst = path + '/' + 'sum_nosmooth'+ '/proc%06d_x.bin' % PROC)
+                unix.cp(src = PATH.MODEL_INIT + '/proc%06d_z.bin' % PROC, dst = path + '/' + 'sum_nosmooth'+ '/proc%06d_z.bin' % PROC)
             solver.smooth(
                    input_path=path+'/'+'sum_nosmooth',
                    output_path=path+'/'+'sum',

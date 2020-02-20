@@ -330,7 +330,7 @@ In your parameter file, please remove
 
 and add one of the following instead
     OPTIMIZE='LBFGS'
-    OPTIMIZE'=NLCG'
+    OPTIMIZE='NLCG'
     OPTIMIZE='steepest_descent'
 
 """
