@@ -5,6 +5,6 @@
 *.swp
 docs/
 tests/
-project/
+project/Aqaba/
 auxiliary/
 scripts/
