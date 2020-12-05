@@ -20,8 +20,11 @@ from seisflows.tools import unix
 from seisflows.tools.tools import call, findpath, saveobj
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 
 class pbs_lg(custom_import('system', 'base')):
@@ -45,7 +48,7 @@ class pbs_lg(custom_import('system', 'base')):
     def check(self):
         """ Checks parameters and paths
         """
-        print msg.Warning_pbs_lg
+        print(msg.Warning_pbs_lg)
 
         # name of job
         if 'TITLE' not in PAR:
@@ -139,7 +142,7 @@ class pbs_lg(custom_import('system', 'base')):
     def run(self, classname, method, hosts='all', **kwargs):
         """ Runs task multiple times in embarrassingly parallel fasion
 
-          Executes classname.method(*args, **kwargs) NTASK times, each time on
+          Executes classname.method(\*args, \*\*kwargs) NTASK times, each time on
           NPROC cpu cores
         """
         self.checkpoint(PATH.OUTPUT, classname, method, args, kwargs)
@@ -239,7 +242,7 @@ class pbs_lg(custom_import('system', 'base')):
             else:
                 states += [0]
             if state in ['F']:
-                print msg.TaskError_PBS % (classname, method, job)
+                print(msg.TaskError_PBS % (classname, method, job))
                 sys.exit(-1)
         isdone = all(states)
 

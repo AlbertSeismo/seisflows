@@ -19,15 +19,17 @@ from seisflows.tools import unix
 from seisflows.tools.tools import divides, exists
 from seisflows.config import ParameterError, save
 from seisflows.workflow.base import base
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
-
-system = sys.modules['seisflows_system']
-solver = sys.modules['seisflows_solver']
-optimize = sys.modules['seisflows_optimize']
-preprocess = sys.modules['seisflows_preprocess']
-postprocess = sys.modules['seisflows_postprocess']
+    system = sys.modules['seisflows_system']
+    solver = sys.modules['seisflows_solver']
+    optimize = sys.modules['seisflows_optimize']
+    preprocess = sys.modules['seisflows_preprocess']
+    postprocess = sys.modules['seisflows_postprocess']
+except:
+    print("Check parameters and paths.")
 
 
 class inversion(base):
@@ -120,26 +122,26 @@ class inversion(base):
         """
         optimize.iter = PAR.BEGIN
         self.setup()  # This will generate synthetics if no data is supplied
-        print ''
+        print('')
 
         while optimize.iter <= PAR.END:
-            print "Starting iteration", optimize.iter
+            print("Starting iteration", str(optimize.iter))
             self.initialize()
 
-            print "Computing gradient"
+            print("Computing gradient")
             self.evaluate_gradient()
 
-            print "Computing search direction"
+            print("Computing search direction")
             self.compute_direction()
 
-            print "Computing step length"
+            print("Computing step length")
             self.line_search()
 
             self.finalize()
             self.clean()
 
             optimize.iter += 1
-            print ''
+            print('')
 
     def setup(self):
         """ Lays groundwork for inversion.
@@ -158,9 +160,9 @@ class inversion(base):
 
         if optimize.iter == 1 or PATH.LOCAL:
             if PATH.DATA:  # If data is supplied (path to data given)
-                print 'Copying user supplied data'
+                print('Copying user supplied data')
             else:
-                print 'Generating synthetic data'
+                print('Generating synthetic data')
 
             system.run('solver', 'setup')
 
@@ -169,7 +171,7 @@ class inversion(base):
         """
         self.write_model(path=PATH.GRAD, suffix='new')
 
-        print 'Generating synthetics'
+        print('Generating synthetics')
         system.run('solver', 'eval_func',
                    path=PATH.GRAD)
 
@@ -191,7 +193,7 @@ class inversion(base):
         optimize.initialize_search()
 
         while True:
-            print " trial step", optimize.line_search.step_count + 1
+            print(" trial step", optimize.line_search.step_count + 1)
             self.evaluate_function()
             status = optimize.update_search()
 
@@ -204,12 +206,12 @@ class inversion(base):
 
             elif status < 0:
                 if optimize.retry_status():
-                    print ' Line search failed\n\n Retrying...'
+                    print(' Line search failed\n\n Retrying...')
                     optimize.restart()
                     self.line_search()
                     break
                 else:
-                    print ' Line search failed\n\n Aborting...'
+                    print(' Line search failed\n\n Aborting...')
                     sys.exit(-1)
 
     def evaluate_function(self):

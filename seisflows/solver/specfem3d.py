@@ -22,11 +22,14 @@ from seisflows.tools.seismic import call_solver
 from seisflows.tools.tools import exists
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 
-system = sys.modules['seisflows_system']
-preprocess = sys.modules['seisflows_preprocess']
+    system = sys.modules['seisflows_system']
+    preprocess = sys.modules['seisflows_preprocess']
+except:
+    print("Check parameters and paths.")
 
 
 class specfem3d(custom_import('solver', 'base')):
@@ -88,8 +91,8 @@ class specfem3d(custom_import('solver', 'base')):
             par = getpar('MODEL').strip()
             if par != 'gll':
                 if self.taskid == 0:
-                    print 'WARNING: Unexpected Par_file setting:'
-                    print 'MODEL =', par
+                    print('WARNING: Unexpected Par_file setting:')
+                    print('MODEL =', str(par))
 
             assert(exists(model_path))
             self.check_mesh_properties(model_path)
@@ -147,17 +150,17 @@ class specfem3d(custom_import('solver', 'base')):
 
         if nt != PAR.NT:
             if self.taskid == 0:
-                print "WARNING: nt != PAR.NT"
+                print("WARNING: nt != PAR.NT")
             setpar('NSTEP', PAR.NT)
 
         if dt != PAR.DT:
             if self.taskid == 0:
-                print "WARNING: dt != PAR.DT"
+                print("WARNING: dt != PAR.DT")
             setpar('DT', PAR.DT)
 
         if self.mesh_properties.nproc != PAR.NPROC:
             if self.taskid == 0:
-                print 'Warning: mesh_properties.nproc != PAR.NPROC'
+                print('Warning: mesh_properties.nproc != PAR.NPROC')
 
         if 'MULTIPLES' in PAR:
             raise NotImplementedError

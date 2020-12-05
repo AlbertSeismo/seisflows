@@ -1,54 +1,74 @@
 seisflows.tools package
 =======================
 
-Submodules
-----------
+seisflows.tools.array module
+----------------------------
 
-seisflows.tools.arraytools module
----------------------------------
+.. automodule:: seisflows.tools.array
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. automodule:: seisflows.tools.arraytools
-    :members:
-    :undoc-members:
-    :show-inheritance:
+seisflows.tools.err module
+--------------------------
 
-seisflows.tools.codetools module
---------------------------------
+.. automodule:: seisflows.tools.err
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. automodule:: seisflows.tools.codetools
-    :members:
-    :undoc-members:
-    :show-inheritance:
+seisflows.tools.graphics module
+-------------------------------
 
-seisflows.tools.configtools module
-----------------------------------
+.. automodule:: seisflows.tools.graphics
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. automodule:: seisflows.tools.configtools
-    :members:
-    :undoc-members:
-    :show-inheritance:
+seisflows.tools.math module
+---------------------------
 
-seisflows.tools.iotools module
+.. automodule:: seisflows.tools.math
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seisflows.tools.msg module
+--------------------------
+
+.. automodule:: seisflows.tools.msg
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seisflows.tools.seismic module
 ------------------------------
 
-.. automodule:: seisflows.tools.iotools
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: seisflows.tools.seismic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seisflows.tools.signal module
+-----------------------------
+
+.. automodule:: seisflows.tools.signal
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seisflows.tools.tools module
+----------------------------
+
+.. automodule:: seisflows.tools.tools
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 seisflows.tools.unix module
 ---------------------------
 
 .. automodule:: seisflows.tools.unix
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: seisflows.tools
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

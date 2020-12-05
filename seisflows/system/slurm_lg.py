@@ -21,8 +21,11 @@ from seisflows.tools import unix
 from seisflows.tools.tools import call, findpath, saveobj, timestamp
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 
 class slurm_lg(custom_import('system', 'base')):
@@ -133,7 +136,7 @@ class slurm_lg(custom_import('system', 'base')):
     def run(self, classname, method, *args, **kwargs):
         """ Runs task multiple times in embarrassingly parallel fasion
 
-          Executes classname.method(*args, **kwargs) NTASK times, each time on
+          Executes classname.method(\*args, \*\*kwargs) NTASK times, each time on
           NPROC cpu cores
         """
         self.checkpoint(PATH.OUTPUT, classname, method, args, kwargs)
@@ -172,7 +175,7 @@ class slurm_lg(custom_import('system', 'base')):
     def run_single(self, classname, method, *args, **kwargs):
         """ Runs task a single time
 
-          Executes classname.method(*args, **kwargs) a single time on NPROC
+          Executes classname.method(\*args, \*\*kwargs) a single time on NPROC
           cpu cores
         """
         self.checkpoint(PATH.OUTPUT, classname, method, args, kwargs)
@@ -231,10 +234,10 @@ class slurm_lg(custom_import('system', 'base')):
         for job in jobs:
             state = self.job_status(job)
             if state in ['TIMEOUT']:
-                print msg.TimoutError % (classname, method, job, PAR.TASKTIME)
+                print(msg.TimoutError % (classname, method, job, PAR.TASKTIME))
                 sys.exit(-1)
             elif state in ['FAILED', 'NODE_FAIL']:
-                print msg.TaskError_SLURM % (classname, method, job)
+                print(msg.TaskError_SLURM % (classname, method, job))
                 sys.exit(-1)
             elif state in ['COMPLETED']:
                 states += [1]

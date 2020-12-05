@@ -4,5 +4,7 @@
 # See LICENCE file
 #
 ###############################################################################
-
-raise NotImplementedError
+try:
+    raise NotImplementedError
+except:
+    print("Not implemented.")

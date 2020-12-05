@@ -1,22 +1,19 @@
 seisflows.postprocess package
 =============================
 
-Submodules
-----------
+seisflows.postprocess.base module
+---------------------------------
+
+.. automodule:: seisflows.postprocess.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 seisflows.postprocess.default module
 ------------------------------------
 
 .. automodule:: seisflows.postprocess.default
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: seisflows.postprocess
-    :members:
-    :undoc-members:
-    :show-inheritance:

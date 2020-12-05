@@ -1,29 +1,36 @@
+.. _sfoptimize:
+
 seisflows.optimize package
 ==========================
 
-Subpackages
------------
+seisflows.optimize.base module
+------------------------------
 
-.. toctree::
+.. automodule:: seisflows.optimize.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   
+seisflows.optimize.LBFGS module
+-------------------------------
 
-    seisflows.optimize.lib
+.. automodule:: seisflows.optimize.LBFGS
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Submodules
-----------
+seisflows.optimize.NLCG module
+------------------------------
 
-seisflows.optimize.default module
----------------------------------
+.. automodule:: seisflows.optimize.NLCG
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. automodule:: seisflows.optimize.default
-    :members:
-    :undoc-members:
-    :show-inheritance:
+seisflows.optimize.steepest\_descent module
+-------------------------------------------
 
-
-Module contents
----------------
-
-.. automodule:: seisflows.optimize
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: seisflows.optimize.steepest_descent
+   :members:
+   :undoc-members:
+   :show-inheritance:

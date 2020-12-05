@@ -15,13 +15,16 @@ from seisflows.tools.tools import exists
 from seisflows.config import ParameterError
 from seisflows.workflow.base import base
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 
-system = sys.modules['seisflows_system']
-solver = sys.modules['seisflows_solver']
-preprocess = sys.modules['seisflows_preprocess']
-postprocess = sys.modules['seisflows_postprocess']
+    system = sys.modules['seisflows_system']
+    solver = sys.modules['seisflows_solver']
+    preprocess = sys.modules['seisflows_preprocess']
+    postprocess = sys.modules['seisflows_postprocess']
+except:
+    print("Check parameters and paths.")
 
 
 class migration(base):
@@ -72,18 +75,18 @@ class migration(base):
         postprocess.setup()
 
         # set up solver machinery
-        print 'Preparing solver...'
+        print('Preparing solver...')
         system.run('solver', 'setup')
 
         self.prepare_model()
 
         # perform migration
-        print 'Generating synthetics...'
+        print('Generating synthetics...')
         system.run('solver', 'eval_func',
                    path=PATH.SCRATCH,
                    write_residuals=False)
 
-        print 'Backprojecting...'
+        print('Backprojecting...')
         system.run('solver', 'eval_grad',
                    path=PATH.SCRATCH,
                    export_traces=PAR.SAVETRACES)
@@ -107,7 +110,7 @@ class migration(base):
         else:
             self.save_kernels_sum()
 
-        print 'Finished\n'
+        print('Finished\n')
 
     # Utility functions
 

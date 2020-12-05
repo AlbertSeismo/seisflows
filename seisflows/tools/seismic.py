@@ -33,11 +33,11 @@ def call_solver(mpiexec, executable, output='solver.log'):
             mpiexec + ' ' + executable,
             shell=True,
             stdout=f)
-    except subprocess.CalledProcessError, err:
-        print msg.SolverError % (mpiexec + ' ' + executable)
+    except subprocess.CalledProcessError as err:
+        print(msg.SolverError % (mpiexec + ' ' + executable))
         sys.exit(-1)
     except OSError:
-        print msg.SolverError % (mpiexec + ' ' + executable)
+        print(msg.SolverError % (mpiexec + ' ' + executable))
         sys.exit(-1)
     finally:
         f.close()
@@ -108,7 +108,7 @@ def getpar(key, file='DATA/Par_file', sep='=', cast=str, noOutput=False):
         return cast(val)
     else:
         if not noOutput:
-            print 'Not found in parameter file: %s\n' % key
+            print('Not found in parameter file: %s\n' % key)
         raise Exception
 
 

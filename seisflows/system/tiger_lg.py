@@ -15,8 +15,11 @@ from uuid import uuid4
 from seisflows.tools import unix
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 
 class tiger_lg(custom_import('system', 'slurm_lg')):

@@ -16,8 +16,10 @@
 import sys
 import os
 
-PAR = sys.modules['seisflows_parameters']
-
+try:
+    PAR = sys.modules['seisflows_parameters']
+except:
+    print("Check parameters and paths.")
 
 def su(path, filename):
     """ Reads Seismic Unix files.
@@ -41,7 +43,8 @@ def su(path, filename):
         the number of point by PAR.NT
     """
     import obspy
-    if PAR.NT < 32768:
+    # if PAR.NT < 32768:
+    if False:
         stream = obspy.read(path + '/' + filename,
                             format='SU',
                             byteorder='<')

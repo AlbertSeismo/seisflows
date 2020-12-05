@@ -19,8 +19,10 @@ import sys
 # Import numpy
 import numpy as np
 
-PAR = sys.modules['seisflows_parameters']
-
+try:
+    PAR = sys.modules['seisflows_parameters']
+except:
+    print("Check parameters and paths.")
 
 def su(stream, path, filename):
     """ Write Seismic Unix files.
@@ -54,7 +56,8 @@ def su(stream, path, filename):
             t.stats.delta = dummy_delta
 
     # write data to file
-    if PAR.NT < max_npts:
+    # if PAR.NT < max_npts:
+    if False:
         stream.write(path+'/'+filename, format='SU')
     else:
         writeBigSuFile(stream, path+'/'+filename)
@@ -67,13 +70,13 @@ def ascii(stream, path, filenames):
         nt = tr.stats.npts
         t1 = float(tr.stats.starttime)
         t2 = t1 + tr.stats.npts*tr.stats.sampling_rate
-        print nt, t1, t2
+        print(nt, t1, t2)
 
         t = np.linspace(t1, t2, nt)
         w = tr.data
 
-        print path + '/' + tr.stats.filename
-        print times.shape, tr.data.shape
+        print(path + '/' + tr.stats.filename)
+        print(times.shape, tr.data.shape)
         np.savetxt(path + '/' + tr.stats.filename,
                    np.column_stack((t, w)))
 

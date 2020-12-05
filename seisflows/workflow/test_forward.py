@@ -12,12 +12,14 @@ import sys
 from seisflows.config import ParameterError
 from seisflows.workflow.base import base
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 
-system = sys.modules['seisflows_system']
-solver = sys.modules['seisflows_solver']
-
+    system = sys.modules['seisflows_system']
+    solver = sys.modules['seisflows_solver']
+except:
+    print("Check parameters and paths.")
 
 class test_forward(base):
     """ Tests solver by running forward simulation
@@ -45,11 +47,11 @@ class test_forward(base):
         """ Generates seismic data
         """
 
-        print 'Running solver...'
+        print('Running solver...')
 
         system.run('solver', 'generate_data',
                    model_path=PATH.MODEL,
                    model_type='gll',
                    model_name='model')
 
-        print "Finished\n"
+        print("Finished\n")

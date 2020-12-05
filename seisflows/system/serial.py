@@ -17,9 +17,11 @@ import numpy as np
 from seisflows.tools import unix
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
-
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 class serial(custom_import('system', 'base')):
     """ An interface through which to submit workflows, run tasks in serial or
@@ -104,7 +106,7 @@ class serial(custom_import('system', 'base')):
                 self.progress(taskid)
             func = getattr(__import__('seisflows_'+classname), method)
             func(**kwargs)
-        print ''
+        print('')
 
     def run_single(self, classname, method, *args, **kwargs):
         """ Runs task a single time
@@ -129,6 +131,6 @@ class serial(custom_import('system', 'base')):
         """ Provides status update
         """
         if PAR.NTASK > 1:
-            print ' task ' + '%02d of %02d' % (taskid+1, PAR.NTASK)
+            print(' task ' + '%02d of %02d' % (taskid+1, PAR.NTASK))
         else:
-            print ' task running'
+            print(' task running')

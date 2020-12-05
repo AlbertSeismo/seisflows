@@ -21,8 +21,11 @@ from seisflows.tools.math import angle
 from seisflows.tools.seismic import Writer
 
 # seisflows.config objects
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 
 class base(object):
@@ -91,7 +94,7 @@ class base(object):
             raise ParameterError
 
         if PAR.OPTIMIZE in ['base']:
-            print msg.CompatibilityError1
+            print(msg.CompatibilityError1)
             sys.exit(-1)
 
         if PAR.LINESEARCH:
@@ -108,6 +111,14 @@ class base(object):
 
         if PAR.STEPLENINIT and PAR.STEPLENMAX:
             assert PAR.STEPLENINIT < PAR.STEPLENMAX
+
+
+    def model_cutoff(self, m):
+        for i in range(len(m)):
+            if m[i] < PAR.CUTOFF_BOTTOM:
+                m[i] = PAR.CUTOFF_BOTTOM
+        return m
+
 
     def setup(self):
         """ Sets up nonlinear optimization machinery
@@ -247,7 +258,7 @@ class base(object):
         theta = angle(p, -g)
 
         if PAR.VERBOSE >= 2:
-            print ' theta: %6.3f' % theta
+            print(' theta: %6.3f' % theta)
 
         thresh = 1.e-3
         if abs(theta) < thresh:

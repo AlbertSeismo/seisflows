@@ -23,11 +23,14 @@ from seisflows.tools import msg, unix
 from seisflows.tools.seismic import Container, call_solver
 from seisflows.tools.tools import Struct, diff, exists
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 
-system = sys.modules['seisflows_system']
-preprocess = sys.modules['seisflows_preprocess']
+    system = sys.modules['seisflows_system']
+    preprocess = sys.modules['seisflows_preprocess']
+except:
+    print("Check parameters and paths.")
 
 
 class base(object):
@@ -73,23 +76,23 @@ class base(object):
         Utilities for combining and smoothing kernels
 
     """
+    try:
+        assert 'MATERIALS' in PAR
+        assert 'DENSITY' in PAR
 
-    assert 'MATERIALS' in PAR
-    assert 'DENSITY' in PAR
-    assert 'VP' in PAR
-    assert 'VS' in PAR
-
-    parameters = []
-    if PAR.MATERIALS == 'Elastic':
-        if PAR.VS == 'Constant':
+        parameters = []
+        if PAR.MATERIALS == 'Elastic':
+            if PAR.VS == 'Constant':
+                parameters += ['vp']
+            if PAR.VP == 'Constant':
+                parameters += ['vs']
+        elif PAR.MATERIALS == 'Acoustic':
             parameters += ['vp']
-        if PAR.VP == 'Constant':
-            parameters += ['vs']
-    elif PAR.MATERIALS == 'Acoustic':
-        parameters += ['vp']
 
-    if PAR.DENSITY == 'Variable':
-        parameters += ['rho']
+        if PAR.DENSITY == 'Variable':
+            parameters += ['rho']
+    except:
+        print("Check parameters and paths.")
 
     def check(self):
         """ Checks parameters and paths
@@ -371,7 +374,7 @@ class base(object):
         # Apply smoothing operator
         unix.cd(self.cwd)
         for name in parameters or self.parameters:
-            print 'Smoothing ', name
+            print('Smoothing ', name)
             call_solver(
                 system.mpiexec(),
                 PATH.SPECFEM_BIN + '/' + 'xsmooth_sem '
@@ -387,7 +390,7 @@ class base(object):
     #
     #See xsmooth_sem.F90
 
-        print ''
+        print('')
 
         # rename output files
         files = glob(output_path+'/*')
@@ -578,7 +581,7 @@ class base(object):
         wildcard = self.source_prefix+'_*'
         globstar = sorted(glob(path + '/' + wildcard))
         if not globstar:
-            print msg.SourceError_SPECFEM % (path, wildcard)
+            print(msg.SourceError_SPECFEM % (path, wildcard))
             sys.exit(-1)
 
         # If source_prefix is 'SOURCE' and that in specfem DATA folder are the

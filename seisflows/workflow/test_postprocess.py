@@ -17,11 +17,14 @@ from seisflows.tools.tools import exists
 from seisflows.config import custom_import, ParameterError
 from seisflows.workflow.base import base
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 
-solver = sys.modules['seisflows_solver']
-postprocess = sys.modules['seisflows_postprocess']
+    solver = sys.modules['seisflows_solver']
+    postprocess = sys.modules['seisflows_postprocess']
+except:
+    print("Check parameters and paths.")
 
 migration = custom_import('workflow', 'migration')()
 

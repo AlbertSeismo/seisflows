@@ -11,8 +11,11 @@ import sys
 # Local imports
 from seisflows.config import custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 
 class default(custom_import('postprocess', 'base')):

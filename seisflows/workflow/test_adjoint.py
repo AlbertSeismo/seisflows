@@ -19,13 +19,15 @@ from seisflows.tools.tools import exists
 from seisflows.config import ParameterError
 from seisflows.workflow.base import base
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 
-system = sys.modules['seisflows_system']
-solver = sys.modules['seisflows_solver']
-preprocess = sys.modules['seisflows_preprocess']
-
+    system = sys.modules['seisflows_system']
+    solver = sys.modules['seisflows_solver']
+    preprocess = sys.modules['seisflows_preprocess']
+except:
+    print("Check parameters and paths.")
 
 def DotProductLHS(keys, x, y):
     val = 0
@@ -87,15 +89,15 @@ class test_adjoint(base):
         unix.mkdir(PATH.SCRATCH)
         preprocess.setup()
 
-        print 'SIMULATION 1 OF 3'
+        print('SIMULATION 1 OF 3')
         system.run('solver', 'setup')
 
-        print 'SIMULATION 2 OF 3'
+        print('SIMULATION 2 OF 3')
         self.prepare_model()
         system.run('solver', 'eval_func',
                    path=PATH.SCRATCH)
 
-        print 'SIMULATION 3 OF 3'
+        print('SIMULATION 3 OF 3')
         system.run('solver', 'eval_grad',
                    path=PATH.SCRATCH)
 
@@ -121,11 +123,11 @@ class test_adjoint(base):
         keys = ['rho', 'vp', 'vs']  # model.keys()
         RHS = DotProductRHS(keys, model, kernels)
 
-        print
-        print 'LHS:', LHS
-        print 'RHS:', RHS
-        print 'RELATIVE DIFFERENCE:', (LHS-RHS)/RHS
-        print
+        print()
+        print('LHS:', LHS)
+        print('RHS:', RHS)
+        print('RELATIVE DIFFERENCE:', (LHS-RHS)/RHS)
+        print()
 
     # Utility functions
 

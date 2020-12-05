@@ -15,8 +15,8 @@ MINUSGRADIENT=0
 
 
 # WORKFLOW
-BEGIN=85                 # first iteration
-END=100                   # last iteration
+BEGIN=16                 # first iteration
+END=20                   # last iteration
 NREC=81                  # number of receivers
 NSRC=15                 # number of sources
 SAVEGRADIENT=1          # save gradient how often
@@ -27,12 +27,14 @@ FORMAT='su'             # data file format
 CHANNELS='z'            # data channels
 NORMALIZE='NormalizeTracesL1'             # normalize
 BANDPASS=0              # bandpass
-FREQLO=0.               # low frequency corner
-FREQHI=0.               # high frequency corner
+FILTER='Bandpass'
+FREQMIN=60.               # low frequency corner
+FREQMAX=100.               # high frequency corner
+
 
 
 # POSTPROCESSING
-SMOOTH=15               # smoothing radius
+SMOOTH=1               # smoothing radius
 #SCALE=6.0e6             # scaling factor
 
 
@@ -43,12 +45,12 @@ STEPMAX=10              # maximum trial steps
 
 
 # SOLVER
-NT=30000                 # number of time steps
+NT=25000                 # number of time steps
 DT=0.00002                 # time step
 F0=50                 # dominant frequency
 
 # SYSTEM
 NTASK=15                # must satisfy 1 <= NTASK <= NSRC
-NPROC=32                 # processors per task
-MPIEXEC='mpirun -np 32 '
+NPROC=3                 # processors per task
+MPIEXEC='mpirun -np 3 '
 

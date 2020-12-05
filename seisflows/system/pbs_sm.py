@@ -20,8 +20,11 @@ from seisflows.tools import unix
 from seisflows.tools.tools import call, findpath, saveobj
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 
 class pbs_lg(custom_import('system', 'base')):
@@ -45,7 +48,7 @@ class pbs_lg(custom_import('system', 'base')):
     def check(self):
         """ Checks parameters and paths
         """
-        print msg.Warning_pbs_sm
+        print(msg.Warning_pbs_sm)
 
         # name of job
         if 'TITLE' not in PAR:
@@ -139,7 +142,7 @@ class pbs_lg(custom_import('system', 'base')):
         """ Runs embarrassingly parallel tasks
 
           Executes the following multiple times:
-              classname.method(*args, **kwargs)
+              classname.method(\*args, \*\*kwargs)
 
           system.taskid serves to provide each running task a unique identifier
         """

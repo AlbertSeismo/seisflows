@@ -20,8 +20,11 @@ from seisflows.tools import unix
 from seisflows.tools.tools import call, findpath, nproc, saveobj
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 
 class multithreaded(custom_import('system', 'multicore')):
@@ -39,12 +42,12 @@ class multithreaded(custom_import('system', 'multicore')):
     def check(self):
         """ Checks parameters and paths
         """
-        print """
+        print("""
             DEPRECATION WARNING
 
                 SYSTEM.MULTITHREADED has been renamed SYSTEM.MULTICORE
 
                 Please update your parameter file.
-        """
+        """)
 
         super(multithreaded, self).check()

@@ -1,30 +1,36 @@
+.. _sfsolver:
+
 seisflows.solver package
 ========================
 
-Submodules
-----------
+seisflows.solver.base module
+----------------------------
+
+.. automodule:: seisflows.solver.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 seisflows.solver.specfem2d module
 ---------------------------------
 
 .. automodule:: seisflows.solver.specfem2d
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 seisflows.solver.specfem3d module
 ---------------------------------
 
 .. automodule:: seisflows.solver.specfem3d
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
+seisflows.solver.specfem3d\_globe module
+----------------------------------------
 
-Module contents
----------------
-
-.. automodule:: seisflows.solver
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: seisflows.solver.specfem3d_globe
+   :members:
+   :undoc-members:
+   :show-inheritance:

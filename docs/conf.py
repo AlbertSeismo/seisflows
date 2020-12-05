@@ -19,7 +19,7 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath("../"))
+sys.path.insert(0, os.path.abspath("../seisflows/"))
 
 # -- General configuration ------------------------------------------------
 
@@ -35,6 +35,7 @@ extensions = [
     'sphinx.ext.imgmath',
     'sphinx.ext.viewcode',
     'sphinx.ext.imgmath',
+    'sphinx.ext.napoleon',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,6 +52,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'SeisFlows'
+author='Yiyu Ni'
 copyright = u'2014, Princeton University'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -204,12 +206,12 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'SeisFlows.tex', u'SeisFlows Documentation',
-   u'Princeton University', 'manual'),
+   u'', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-#latex_logo = None
+#latex_logo = './img.jpeg'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.

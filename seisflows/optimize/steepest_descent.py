@@ -14,9 +14,11 @@ import numpy as np
 # Local imports
 from seisflows.config import custom_import, ParameterError
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
-
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 class steepest_descent(custom_import('optimize', 'base')):
     """ Steepest descent method

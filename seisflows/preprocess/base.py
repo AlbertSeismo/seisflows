@@ -19,9 +19,11 @@ from seisflows.config import ParameterError
 from seisflows.plugins import adjoint, misfit, readers, writers
 from seisflows.tools import signal
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
-
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 class base(object):
     """ Data preprocessing class
@@ -63,11 +65,11 @@ class base(object):
 
         # assertions
         if PAR.FORMAT not in dir(readers):
-            print msg.ReaderError
+            print(msg.ReaderError)
             raise ParameterError()
 
         if PAR.FORMAT not in dir(writers):
-            print msg.WriterError
+            print(msg.WriterError)
             raise ParameterError()
 
         self.check_filter()
@@ -110,6 +112,7 @@ class base(object):
             syn = self.apply_filter(syn)
             syn = self.apply_mute(syn)
             syn = self.apply_normalize(syn)
+            # syn = self.apply_csg_mute(syn)
             # syn = self.apply_downsampling(syn)
 
 
@@ -277,6 +280,30 @@ class base(object):
                     tr.data /= w
 
         return traces
+
+    def apply_csg_mute(self, traces):
+        for tr in traces:
+            tr.data = self.csg_mute(tr.data, PAR.T, PAR.T1)
+        return traces
+
+    def csg_mute(self, seismo_w, T, T1):
+    # T = 10
+    # T1 = 10000
+        nt = len(seismo_w)
+        tapering = np.zeros(nt)
+        tau_o = np.argmax(seismo_w)
+        b1 = tau_o - 0.5 * T1
+        b2 = tau_o + 0.5 * T1
+        for j in range(nt):
+            if j < b1 -10 * T:
+                tapering[j] = 0
+            elif j >= b1 - 20 * T and j <= b1:
+                tapering[j] = np.exp(-(j-tau_o)**2/2*(2*T)**2)
+            elif j >= b1 and j <= b2:
+                tapering[j] = 1
+            else :
+                tapering[j] = np.exp(-(j-b2)**2/2*(2*T)**2)
+        return seismo_w * tapering
 
     def apply_filter_backwards(self, traces):
         for tr in traces:

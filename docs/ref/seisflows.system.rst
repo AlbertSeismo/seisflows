@@ -1,46 +1,100 @@
+.. _sfsystem:
+
 seisflows.system package
 ========================
 
-Submodules
-----------
+seisflows.system.base module
+----------------------------
 
-seisflows.system.pbs_torque module
-----------------------------------
+.. automodule:: seisflows.system.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. automodule:: seisflows.system.pbs_torque
-    :members:
-    :undoc-members:
-    :show-inheritance:
+seisflows.system.lsf\_lg module
+-------------------------------
+
+.. automodule:: seisflows.system.lsf_lg
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seisflows.system.lsf\_sm module
+-------------------------------
+
+.. automodule:: seisflows.system.lsf_sm
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seisflows.system.multicore module
+---------------------------------
+
+.. automodule:: seisflows.system.multicore
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seisflows.system.multithreaded module
+-------------------------------------
+
+.. automodule:: seisflows.system.multithreaded
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seisflows.system.pbs\_lg module
+-------------------------------
+
+.. automodule:: seisflows.system.pbs_lg
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seisflows.system.pbs\_sm module
+-------------------------------
+
+.. automodule:: seisflows.system.pbs_sm
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 seisflows.system.serial module
 ------------------------------
 
 .. automodule:: seisflows.system.serial
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-seisflows.system.slurm module
------------------------------
+seisflows.system.slurm\_lg module
+---------------------------------
 
-.. automodule:: seisflows.system.slurm
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: seisflows.system.slurm_lg
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-seisflows.system.slurm_big_job module
--------------------------------------
+seisflows.system.slurm\_sm module
+---------------------------------
 
-.. automodule:: seisflows.system.slurm_big_job
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: seisflows.system.slurm_sm
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
+seisflows.system.tiger\_lg module
+---------------------------------
 
-Module contents
----------------
+.. automodule:: seisflows.system.tiger_lg
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. automodule:: seisflows.system
-    :members:
-    :undoc-members:
-    :show-inheritance:
+seisflows.system.tiger\_sm module
+---------------------------------
+
+.. automodule:: seisflows.system.tiger_sm
+   :members:
+   :undoc-members:
+   :show-inheritance:

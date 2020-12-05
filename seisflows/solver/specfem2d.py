@@ -22,11 +22,15 @@ from seisflows.tools.seismic import call_solver
 from seisflows.tools.tools import exists
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
 
-system = sys.modules['seisflows_system']
-preprocess = sys.modules['seisflows_preprocess']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+
+    system = sys.modules['seisflows_system']
+    preprocess = sys.modules['seisflows_preprocess']
+except:
+    print("Check parameters and paths.")
 
 
 class specfem2d(custom_import('solver', 'base')):
@@ -34,9 +38,12 @@ class specfem2d(custom_import('solver', 'base')):
 
       See base class for method descriptions
     """
-    if PAR.MATERIALS == 'LegacyAcoustic':
-        parameters = []
-        parameters += ['vs']
+    try:
+        if PAR.MATERIALS == 'LegacyAcoustic':
+            parameters = []
+            parameters += ['vs']
+    except: 
+        print("Check parameters and paths.")
 
     def check(self):
         """ Checks parameters and paths
@@ -50,8 +57,8 @@ class specfem2d(custom_import('solver', 'base')):
         if 'DT' not in PAR:
             raise Exception
 
-        if 'F0' not in PAR:
-            raise Exception
+        # if 'F0' not in PAR:
+            # raise Exception
 
         # check data format
         if 'FORMAT' not in PAR:
@@ -82,26 +89,26 @@ class specfem2d(custom_import('solver', 'base')):
         if not found:
             raise Exception('Not found in Specfem Par_file: DT or deltat')
 
-        f0 = getpar('f0', file='DATA/SOURCE', cast=float)
+        # f0 = getpar('f0', file='DATA/SOURCE', cast=float)
 
         if nt != PAR.NT:
             if self.taskid == 0:
-                print "WARNING: nt != PAR.NT", nt, PAR.NT
+                print("WARNING: nt != PAR.NT", str(nt), str(PAR.NT))
             setpar('nt', PAR.NT)
 
         if dt != PAR.DT:
             if self.taskid == 0:
-                print "WARNING: dt != PAR.DT", dt, PAR.DT
+                print("WARNING: dt != PAR.DT", str(dt), str(PAR.DT))
             setpar('deltat', PAR.DT)
 
-        if f0 != PAR.F0:
-            if self.taskid == 0:
-                print "WARNING: f0 != PAR.F0"
-            setpar('f0', PAR.F0, filename='DATA/SOURCE')
+        # if f0 != PAR.F0:
+        #     if self.taskid == 0:
+        #         print("WARNING: f0 != PAR.F0")
+        #     setpar('f0', PAR.F0, filename='DATA/SOURCE')
 
         if self.mesh_properties.nproc != PAR.NPROC:
             if self.taskid == 0:
-                print 'Warning: mesh_properties.nproc != PAR.NPROC'
+                print('Warning: mesh_properties.nproc != PAR.NPROC')
 
         if 'MULTIPLES' in PAR:
             if PAR.MULTIPLES:

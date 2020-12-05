@@ -17,12 +17,15 @@ from seisflows.tools import unix
 from seisflows.tools.tools import exists
 from seisflows.config import ParameterError
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 #optimize = sys.modules['seisflows_optimize']
 
-system = sys.modules['seisflows_system']
-solver = sys.modules['seisflows_solver']
+    system = sys.modules['seisflows_system']
+    solver = sys.modules['seisflows_solver']
+except:
+    print("Check parameters and paths.")
 
 
 class base(object):

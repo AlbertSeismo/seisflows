@@ -134,7 +134,7 @@ def savejson(filename, obj):
 
 def loadpy(filename):
     if not exists(filename):
-        print msg.FileError % filename
+        print(msg.FileError % filename)
         raise IOError
 
     # load module

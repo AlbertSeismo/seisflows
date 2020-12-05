@@ -18,10 +18,13 @@ from seisflows.plugins import adjoint, misfit
 from seisflows.tools import unix
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 
-system = sys.modules['seisflows_system']
+    system = sys.modules['seisflows_system']
+except:
+    print("Check parameters and paths.")
 
 
 class double_difference(custom_import('preprocess', 'base')):
@@ -34,7 +37,7 @@ class double_difference(custom_import('preprocess', 'base')):
         """ Checks parameters, paths, and dependencies
         """
         super(double_difference, self).check()
-
+        print("Using double difference misfit.")
         if not hasattr(PAR, 'DISTMAX'):
             setattr(PAR, 'DISTMAX', float("inf"))
 
@@ -101,11 +104,11 @@ class double_difference(custom_import('preprocess', 'base')):
         rsdlist += [rsd]
         np.savetxt(filename, rsdlist)
 
-    def sum_residuals(self):
+    def sum_residuals(self, files):
         """ Sums squares of residuals
         """
         total_misfit = 0.
-        for path in paths:
+        for path in files:
             total_misfit += np.sum(np.loadtxt(path)**2.)
         return total_misfit
 
@@ -152,7 +155,7 @@ class double_difference(custom_import('preprocess', 'base')):
         vi[1:-1] = (si[2:] - si[0:-2])/(2.*dt)
         vj[1:-1] = (sj[2:] - sj[0:-2])/(2.*dt)
 
-        vjo = self.shift(vj, -t0/dt)
+        vjo = self.shift(vj, int(np.floor(-t0/dt)))
 
         w = sum(vi*vjo*dt)
         w = max(vjo)

@@ -6,7 +6,11 @@
 ###############################################################################
 
 # Import system modules
-import copy_reg
+try:
+    import copy_reg
+except:
+    import copyreg
+
 import os
 import sys
 import types
@@ -55,7 +59,7 @@ def config():
     # _output() return the path to the output folder where the results will
     # be stored
     if exists(_output()):
-        print msg.WarningOverwrite
+        print(msg.WarningOverwrite)
         sys.exit()
 
     # Instantiate and register objects (see comment at the top of the file)
@@ -67,11 +71,11 @@ def config():
         sys.modules['seisflows_'+name].check()
 
     if not hasattr(sys.modules['seisflows_parameters'], 'workflow'.upper()):
-        print msg.MissingParameter_Worfklow
+        print(msg.MissingParameter_Worfklow)
         sys.exit(-1)
 
     if not hasattr(sys.modules['seisflows_parameters'], 'system'.upper()):
-        print msg.MissingParameter_System
+        print(msg.MissingParameter_System)
         sys.exit(-1)
 
 
@@ -291,5 +295,7 @@ def _unpickle_method(func_name, obj, cls):
             break
     return func.__get__(obj, cls)
 
-
-copy_reg.pickle(types.MethodType, _pickle_method, _unpickle_method)
+try:
+    copy_reg.pickle(types.MethodType, _pickle_method, _unpickle_method)
+except:
+    copyreg.pickle(types.MethodType, _pickle_method, _unpickle_method)

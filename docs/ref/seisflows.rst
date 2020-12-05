@@ -1,25 +1,20 @@
-seisflows package
-=================
-
-Subpackages
------------
-
 .. toctree::
+   :maxdepth: 1
 
-    seisflows.extensions
-    seisflows.optimize
-    seisflows.postprocess
-    seisflows.preprocess
-    seisflows.seistools
-    seisflows.solver
-    seisflows.system
-    seisflows.tools
-    seisflows.workflow
+   seisflows.optimize
+   seisflows.plugins
+   seisflows.postprocess
+   seisflows.preprocess
+   seisflows.solver
+   seisflows.system
+   seisflows.tools
+   seisflows.workflow
 
-Module contents
----------------
 
-.. automodule:: seisflows
-    :members:
-    :undoc-members:
-    :show-inheritance:
+seisflows.config module
+-----------------------
+
+.. automodule:: seisflows.config
+   :members:
+   :undoc-members:
+   :show-inheritance:

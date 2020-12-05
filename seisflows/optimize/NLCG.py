@@ -15,8 +15,12 @@ import numpy as np
 from seisflows.config import custom_import, ParameterError
 from seisflows.plugins import optimize
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
+
 
 
 class NLCG(custom_import('optimize', 'base')):

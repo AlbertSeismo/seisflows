@@ -13,10 +13,14 @@ import time
 from seisflows.config import ParameterError
 from seisflows.workflow.base import base
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+    system = sys.modules['seisflows_system']
+except:
+    print("Check parameters and paths.")
 
-system = sys.modules['seisflows_system']
+
 
 
 class test_system(base):
@@ -40,15 +44,15 @@ class test_system(base):
         system.run('workflow', 'hello',
                    msg='Hello from %d')
 
-        print ''
+        print('')
 
     def hello(self, msg='Hello from %d'):
         """ Prints hello message
         """
         time.sleep(1)
         try:
-            print msg % (system.taskid()+1)
+            print(msg % (system.taskid()+1))
         except:
-            print msg
+            print(msg)
 
-        print ''
+        print('')
