@@ -1,0 +1,726 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>seisflows.system package &#8212; SeisFlows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="seisflows.tools package" href="seisflows.tools.html" />
+    <link rel="prev" title="seisflows.solver package" href="seisflows.solver.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="seisflows.tools.html" title="seisflows.tools package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="seisflows.solver.html" title="seisflows.solver package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="seisflows.html" accesskey="U">seisflows.config module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="seisflows-system-package">
+<span id="sfsystem"></span><h1>seisflows.system package<a class="headerlink" href="#seisflows-system-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-seisflows.system.base">
+<span id="seisflows-system-base-module"></span><h2>seisflows.system.base module<a class="headerlink" href="#module-seisflows.system.base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.base.base">
+<em class="property">class </em><code class="descclassname">seisflows.system.base.</code><code class="descname">base</code><a class="reference internal" href="../_modules/seisflows/system/base.html#base"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.base.base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract base class</p>
+<dl class="method">
+<dt id="seisflows.system.base.base.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/base.html#base.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.base.base.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.base.base.checkpoint">
+<code class="descname">checkpoint</code><span class="sig-paren">(</span><em>path</em>, <em>classname</em>, <em>method</em>, <em>args</em>, <em>kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/base.html#base.checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.base.base.checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes information to disk so tasks can be executed remotely</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.base.base.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/base.html#base.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.base.base.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task multiple times</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.base.base.run_single">
+<code class="descname">run_single</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/base.html#base.run_single"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.base.base.run_single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task a single time</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.base.base.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/base.html#base.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.base.base.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits workflow</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.base.base.taskid">
+<code class="descname">taskid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/base.html#base.taskid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.base.base.taskid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a unique identifier for each running task</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.lsf_lg">
+<span id="seisflows-system-lsf-lg-module"></span><h2>seisflows.system.lsf_lg module<a class="headerlink" href="#module-seisflows.system.lsf_lg" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.lsf_lg.lsf_lg">
+<em class="property">class </em><code class="descclassname">seisflows.system.lsf_lg.</code><code class="descname">lsf_lg</code><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.base.base" title="seisflows.system.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.base.base</span></code></a></p>
+<p>An interface through which to submit workflows, run tasks in serial or
+parallel, and perform other system functions.</p>
+<p>By hiding environment details behind a python interface layer, these
+classes provide a consistent command set across different computing
+environments.</p>
+<p>Intermediate files are written to a global scratch path PATH.SCRATCH,
+which must be accessible to all compute nodes.</p>
+<p>Optionally, users can provide a local scratch path PATH.LOCAL if each
+compute node has its own local filesystem.</p>
+<p>For important additional information, please see
+<a class="reference external" href="http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration">http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration</a></p>
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.job_id_list">
+<code class="descname">job_id_list</code><span class="sig-paren">(</span><em>stdout</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.job_id_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.job_id_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.job_status">
+<code class="descname">job_status</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>jobs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.job_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.job_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.mpiexec">
+<code class="descname">mpiexec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.mpiexec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.mpiexec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies MPI executable used to invoke solver</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>hosts='all'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task multiple times in embarrassingly parallel fasion</p>
+<p>Executes classname.method(*args, **kwargs) NTASK times, each time on
+NPROC cpu cores</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.run_single">
+<code class="descname">run_single</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>hosts='all'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.run_single"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.run_single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task multiple times in embarrassingly parallel fasion</p>
+<p>Executes classname.method(*args, **kwargs) NTASK times, each time on
+NPROC cpu cores</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.save_kwargs">
+<code class="descname">save_kwargs</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.save_kwargs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.save_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>workflow</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits workflow</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.taskid">
+<code class="descname">taskid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.taskid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.taskid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a unique identifier for each running task</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.lsf_lg.lsf_lg.timestamp">
+<code class="descname">timestamp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/lsf_lg.html#lsf_lg.timestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.lsf_lg.lsf_lg.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.lsf_sm">
+<span id="seisflows-system-lsf-sm-module"></span><h2>seisflows.system.lsf_sm module<a class="headerlink" href="#module-seisflows.system.lsf_sm" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-seisflows.system.multicore">
+<span id="seisflows-system-multicore-module"></span><h2>seisflows.system.multicore module<a class="headerlink" href="#module-seisflows.system.multicore" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.multicore.multicore">
+<em class="property">class </em><code class="descclassname">seisflows.system.multicore.</code><code class="descname">multicore</code><a class="reference internal" href="../_modules/seisflows/system/multicore.html#multicore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.multicore.multicore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.serial.serial" title="seisflows.system.serial.serial"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.serial.serial</span></code></a></p>
+<p>An interface through which to submit workflows, run tasks in serial or
+parallel, and perform other system functions.</p>
+<p>By hiding environment details behind a python interface layer, these
+classes provide a consistent command set across different computing
+environments.</p>
+<p>For important additional information, please see
+<a class="reference external" href="http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration">http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration</a></p>
+<dl class="method">
+<dt id="seisflows.system.multicore.multicore.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/multicore.html#multicore.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.multicore.multicore.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.multicore.multicore.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/multicore.html#multicore.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.multicore.multicore.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task multiple times in embarrassingly parallel fasion</p>
+<p>Executes classname.method(*args, **kwargs) NTASK times, each time on
+NPROC cpu cores</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.multicore.multicore.run_single">
+<code class="descname">run_single</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/multicore.html#multicore.run_single"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.multicore.multicore.run_single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task a single time</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.multicore.multicore.save_kwargs">
+<code class="descname">save_kwargs</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/multicore.html#multicore.save_kwargs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.multicore.multicore.save_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.multicore.multicore.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>workflow</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/multicore.html#multicore.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.multicore.multicore.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits job</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.multithreaded">
+<span id="seisflows-system-multithreaded-module"></span><h2>seisflows.system.multithreaded module<a class="headerlink" href="#module-seisflows.system.multithreaded" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.multithreaded.multithreaded">
+<em class="property">class </em><code class="descclassname">seisflows.system.multithreaded.</code><code class="descname">multithreaded</code><a class="reference internal" href="../_modules/seisflows/system/multithreaded.html#multithreaded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.multithreaded.multithreaded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.multicore.multicore" title="seisflows.system.multicore.multicore"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.multicore.multicore</span></code></a></p>
+<p>An interface through which to submit workflows, run tasks in serial or
+parallel, and perform other system functions.</p>
+<p>By hiding environment details behind a python interface layer, these
+classes provide a consistent command set across different computing
+environments.</p>
+<p>For important additional information, please see
+<a class="reference external" href="http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration">http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration</a></p>
+<dl class="method">
+<dt id="seisflows.system.multithreaded.multithreaded.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/multithreaded.html#multithreaded.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.multithreaded.multithreaded.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.pbs_lg">
+<span id="seisflows-system-pbs-lg-module"></span><h2>seisflows.system.pbs_lg module<a class="headerlink" href="#module-seisflows.system.pbs_lg" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.pbs_lg.pbs_lg">
+<em class="property">class </em><code class="descclassname">seisflows.system.pbs_lg.</code><code class="descname">pbs_lg</code><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.base.base" title="seisflows.system.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.base.base</span></code></a></p>
+<p>An interface through which to submit workflows, run tasks in serial or
+parallel, and perform other system functions.</p>
+<p>By hiding environment details behind a python interface layer, these
+classes provide a consistent command set across different computing
+environments.</p>
+<p>Intermediate files are written to a global scratch path PATH.SCRATCH,
+which must be accessible to all compute nodes.</p>
+<p>Optionally, users can provide a local scratch path PATH.LOCAL if each
+compute node has its own local filesystem.</p>
+<p>For important additional information, please see
+<a class="reference external" href="http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration">http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration</a></p>
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.job_array_args">
+<code class="descname">job_array_args</code><span class="sig-paren">(</span><em>hosts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.job_array_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.job_array_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.job_array_cmd">
+<code class="descname">job_array_cmd</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>hosts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.job_array_cmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.job_array_cmd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.job_array_status">
+<code class="descname">job_array_status</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>jobs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.job_array_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.job_array_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines completion status of one or more jobs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.mpiexec">
+<code class="descname">mpiexec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.mpiexec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.mpiexec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies MPI executable used to invoke solver</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>hosts='all'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task multiple times in embarrassingly parallel fasion</p>
+<p>Executes classname.method(*args, **kwargs) NTASK times, each time on
+NPROC cpu cores</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.save_kwargs">
+<code class="descname">save_kwargs</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.save_kwargs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.save_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>workflow</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits workflow</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.submit_job_array">
+<code class="descname">submit_job_array</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>hosts='all'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.submit_job_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.submit_job_array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_lg.pbs_lg.taskid">
+<code class="descname">taskid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_lg.html#pbs_lg.taskid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_lg.pbs_lg.taskid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a unique identifier for each running task</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.pbs_sm">
+<span id="seisflows-system-pbs-sm-module"></span><h2>seisflows.system.pbs_sm module<a class="headerlink" href="#module-seisflows.system.pbs_sm" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.pbs_sm.pbs_lg">
+<em class="property">class </em><code class="descclassname">seisflows.system.pbs_sm.</code><code class="descname">pbs_lg</code><a class="reference internal" href="../_modules/seisflows/system/pbs_sm.html#pbs_lg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_sm.pbs_lg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.base.base" title="seisflows.system.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.base.base</span></code></a></p>
+<p>An interface through which to submit workflows, run tasks in serial or
+parallel, and perform other system functions.</p>
+<p>By hiding environment details behind a python interface layer, these
+classes provide a consistent command set across different computing
+environments.</p>
+<p>Intermediate files are written to a global scratch path PATH.SCRATCH,
+which must be accessible to all compute nodes.</p>
+<p>Optionally, users can provide a local scratch path PATH.LOCAL if each
+compute node has its own local filesystem.</p>
+<p>For important additional information, please see
+<a class="reference external" href="http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration">http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration</a></p>
+<dl class="method">
+<dt id="seisflows.system.pbs_sm.pbs_lg.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_sm.html#pbs_lg.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_sm.pbs_lg.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_sm.pbs_lg.hostlist">
+<code class="descname">hostlist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_sm.html#pbs_lg.hostlist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_sm.pbs_lg.hostlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates list of allocated cores</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_sm.pbs_lg.mpiexec">
+<code class="descname">mpiexec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_sm.html#pbs_lg.mpiexec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_sm.pbs_lg.mpiexec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies MPI executable used to invoke solver</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_sm.pbs_lg.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>hosts='all'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_sm.html#pbs_lg.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_sm.pbs_lg.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs embarrassingly parallel tasks</p>
+<dl class="docutils">
+<dt>Executes the following multiple times:</dt>
+<dd>classname.method(*args, **kwargs)</dd>
+</dl>
+<p>system.taskid serves to provide each running task a unique identifier</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_sm.pbs_lg.save_kwargs">
+<code class="descname">save_kwargs</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_sm.html#pbs_lg.save_kwargs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_sm.pbs_lg.save_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_sm.pbs_lg.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>workflow</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_sm.html#pbs_lg.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_sm.pbs_lg.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits workflow</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.pbs_sm.pbs_lg.taskid">
+<code class="descname">taskid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/pbs_sm.html#pbs_lg.taskid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.pbs_sm.pbs_lg.taskid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a unique identifier for each running task</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.serial">
+<span id="seisflows-system-serial-module"></span><h2>seisflows.system.serial module<a class="headerlink" href="#module-seisflows.system.serial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.serial.serial">
+<em class="property">class </em><code class="descclassname">seisflows.system.serial.</code><code class="descname">serial</code><a class="reference internal" href="../_modules/seisflows/system/serial.html#serial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.serial.serial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.base.base" title="seisflows.system.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.base.base</span></code></a></p>
+<p>An interface through which to submit workflows, run tasks in serial or
+parallel, and perform other system functions.</p>
+<p>By hiding environment details behind a python interface layer, these
+classes provide a consistent command set across different computing
+environments.</p>
+<p>For important additional information, please see
+<a class="reference external" href="http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration">http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration</a></p>
+<dl class="method">
+<dt id="seisflows.system.serial.serial.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/serial.html#serial.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.serial.serial.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.serial.serial.mpiexec">
+<code class="descname">mpiexec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/serial.html#serial.mpiexec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.serial.serial.mpiexec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies MPI executable used to invoke solver</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.serial.serial.progress">
+<code class="descname">progress</code><span class="sig-paren">(</span><em>taskid</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/serial.html#serial.progress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.serial.serial.progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides status update</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.serial.serial.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>hosts='all'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/serial.html#serial.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.serial.serial.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes method from classname multiple times in serial
+taskid is used to identified a given task (one source)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.serial.serial.run_single">
+<code class="descname">run_single</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/serial.html#serial.run_single"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.serial.serial.run_single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task a single time</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.serial.serial.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>workflow</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/serial.html#serial.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.serial.serial.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits job</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.serial.serial.taskid">
+<code class="descname">taskid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/serial.html#serial.taskid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.serial.serial.taskid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value of the environment variable SEISFLOWS_TASKID
+which provides a unique identifier for each running task</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.slurm_lg">
+<span id="seisflows-system-slurm-lg-module"></span><h2>seisflows.system.slurm_lg module<a class="headerlink" href="#module-seisflows.system.slurm_lg" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.slurm_lg.slurm_lg">
+<em class="property">class </em><code class="descclassname">seisflows.system.slurm_lg.</code><code class="descname">slurm_lg</code><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.base.base" title="seisflows.system.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.base.base</span></code></a></p>
+<p>An interface through which to submit workflows, run tasks in serial or
+parallel, and perform other system functions.</p>
+<p>By hiding environment details behind a python interface layer, these
+classes provide a consistent command set across different computing
+environments.</p>
+<p>Intermediate files are written to a global scratch path PATH.SCRATCH,
+which must be accessible to all compute nodes.</p>
+<p>Optionally, users can provide a local scratch path PATH.LOCAL if each
+compute node has its own local filesystem.</p>
+<p>For important additional information, please see
+<a class="reference external" href="http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration">http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration</a></p>
+<dl class="method">
+<dt id="seisflows.system.slurm_lg.slurm_lg.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_lg.slurm_lg.job_array_status">
+<code class="descname">job_array_status</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>jobs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg.job_array_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg.job_array_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines completion status of job or job array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_lg.slurm_lg.job_id_list">
+<code class="descname">job_id_list</code><span class="sig-paren">(</span><em>stdout</em>, <em>ntask</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg.job_id_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg.job_id_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses job id list from sbatch standard output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_lg.slurm_lg.job_status">
+<code class="descname">job_status</code><span class="sig-paren">(</span><em>job</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg.job_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg.job_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries completion status of a single job</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_lg.slurm_lg.mpiexec">
+<code class="descname">mpiexec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg.mpiexec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg.mpiexec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies MPI executable used to invoke solver</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_lg.slurm_lg.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task multiple times in embarrassingly parallel fasion</p>
+<p>Executes classname.method(*args, **kwargs) NTASK times, each time on
+NPROC cpu cores</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_lg.slurm_lg.run_single">
+<code class="descname">run_single</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg.run_single"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg.run_single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task a single time</p>
+<p>Executes classname.method(*args, **kwargs) a single time on NPROC
+cpu cores</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_lg.slurm_lg.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>workflow</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits workflow</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_lg.slurm_lg.taskid">
+<code class="descname">taskid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_lg.html#slurm_lg.taskid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_lg.slurm_lg.taskid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a unique identifier for each running task</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.slurm_sm">
+<span id="seisflows-system-slurm-sm-module"></span><h2>seisflows.system.slurm_sm module<a class="headerlink" href="#module-seisflows.system.slurm_sm" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.slurm_sm.slurm_sm">
+<em class="property">class </em><code class="descclassname">seisflows.system.slurm_sm.</code><code class="descname">slurm_sm</code><a class="reference internal" href="../_modules/seisflows/system/slurm_sm.html#slurm_sm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_sm.slurm_sm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.base.base" title="seisflows.system.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.base.base</span></code></a></p>
+<p>An interface through which to submit workflows, run tasks in serial or
+parallel, and perform other system functions.</p>
+<p>By hiding environment details behind a python interface layer, these
+classes provide a consistent command set across different computing
+environments.</p>
+<p>Intermediate files are written to a global scratch path PATH.SCRATCH,
+which must be accessible to all compute nodes.</p>
+<p>Optionally, users can provide a local scratch path PATH.LOCAL if each
+compute node has its own local filesystem.</p>
+<p>For important additional information, please see
+<a class="reference external" href="http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration">http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration</a></p>
+<dl class="method">
+<dt id="seisflows.system.slurm_sm.slurm_sm.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_sm.html#slurm_sm.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_sm.slurm_sm.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_sm.slurm_sm.hostlist">
+<code class="descname">hostlist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_sm.html#slurm_sm.hostlist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_sm.slurm_sm.hostlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates list of allocated cores</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_sm.slurm_sm.mpiexec">
+<code class="descname">mpiexec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_sm.html#slurm_sm.mpiexec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_sm.slurm_sm.mpiexec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies MPI executable used to invoke solver</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_sm.slurm_sm.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_sm.html#slurm_sm.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_sm.slurm_sm.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task multiple times in embarrassingly parallel fasion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_sm.slurm_sm.run_single">
+<code class="descname">run_single</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_sm.html#slurm_sm.run_single"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_sm.slurm_sm.run_single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs task a single time</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_sm.slurm_sm.save_kwargs">
+<code class="descname">save_kwargs</code><span class="sig-paren">(</span><em>classname</em>, <em>method</em>, <em>kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_sm.html#slurm_sm.save_kwargs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_sm.slurm_sm.save_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_sm.slurm_sm.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>workflow</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_sm.html#slurm_sm.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_sm.slurm_sm.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits workflow</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.slurm_sm.slurm_sm.taskid">
+<code class="descname">taskid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/slurm_sm.html#slurm_sm.taskid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.slurm_sm.slurm_sm.taskid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a unique identifier for each running task</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.tiger_lg">
+<span id="seisflows-system-tiger-lg-module"></span><h2>seisflows.system.tiger_lg module<a class="headerlink" href="#module-seisflows.system.tiger_lg" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.tiger_lg.tiger_lg">
+<em class="property">class </em><code class="descclassname">seisflows.system.tiger_lg.</code><code class="descname">tiger_lg</code><a class="reference internal" href="../_modules/seisflows/system/tiger_lg.html#tiger_lg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.tiger_lg.tiger_lg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.slurm_lg.slurm_lg" title="seisflows.system.slurm_lg.slurm_lg"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.slurm_lg.slurm_lg</span></code></a></p>
+<p>Specially designed system interface for tiger.princeton.edu</p>
+<p>See parent class for more information.</p>
+<dl class="method">
+<dt id="seisflows.system.tiger_lg.tiger_lg.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/tiger_lg.html#tiger_lg.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.tiger_lg.tiger_lg.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.tiger_lg.tiger_lg.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/tiger_lg.html#tiger_lg.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.tiger_lg.tiger_lg.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits job</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.system.tiger_sm">
+<span id="seisflows-system-tiger-sm-module"></span><h2>seisflows.system.tiger_sm module<a class="headerlink" href="#module-seisflows.system.tiger_sm" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.system.tiger_sm.tiger_sm">
+<em class="property">class </em><code class="descclassname">seisflows.system.tiger_sm.</code><code class="descname">tiger_sm</code><a class="reference internal" href="../_modules/seisflows/system/tiger_sm.html#tiger_sm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.tiger_sm.tiger_sm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.system.slurm_sm.slurm_sm" title="seisflows.system.slurm_sm.slurm_sm"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.system.slurm_sm.slurm_sm</span></code></a></p>
+<p>Specially designed system interface for tiger.princeton.edu</p>
+<p>See parent class for more information.</p>
+<dl class="method">
+<dt id="seisflows.system.tiger_sm.tiger_sm.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/tiger_sm.html#tiger_sm.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.tiger_sm.tiger_sm.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.system.tiger_sm.tiger_sm.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/system/tiger_sm.html#tiger_sm.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.system.tiger_sm.tiger_sm.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits job</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">seisflows.system package</a><ul>
+<li><a class="reference internal" href="#module-seisflows.system.base">seisflows.system.base module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.lsf_lg">seisflows.system.lsf_lg module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.lsf_sm">seisflows.system.lsf_sm module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.multicore">seisflows.system.multicore module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.multithreaded">seisflows.system.multithreaded module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.pbs_lg">seisflows.system.pbs_lg module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.pbs_sm">seisflows.system.pbs_sm module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.serial">seisflows.system.serial module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.slurm_lg">seisflows.system.slurm_lg module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.slurm_sm">seisflows.system.slurm_sm module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.tiger_lg">seisflows.system.tiger_lg module</a></li>
+<li><a class="reference internal" href="#module-seisflows.system.tiger_sm">seisflows.system.tiger_sm module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="seisflows.solver.html"
+                        title="previous chapter">seisflows.solver package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="seisflows.tools.html"
+                        title="next chapter">seisflows.tools package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ref/seisflows.system.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="seisflows.tools.html" title="seisflows.tools package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="seisflows.solver.html" title="seisflows.solver package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="seisflows.html" >seisflows.config module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Princeton University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

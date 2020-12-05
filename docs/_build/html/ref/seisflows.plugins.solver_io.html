@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>seisflows.plugins.solver_io package &#8212; SeisFlows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="seisflows.postprocess package" href="seisflows.postprocess.html" />
+    <link rel="prev" title="seisflows.plugins.solver package" href="seisflows.plugins.solver.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="seisflows.postprocess.html" title="seisflows.postprocess package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="seisflows.plugins.solver.html" title="seisflows.plugins.solver package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="seisflows.html" >seisflows.config module</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="seisflows.plugins.html" accesskey="U">seisflows.plugins package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="seisflows-plugins-solver-io-package">
+<h1>seisflows.plugins.solver_io package<a class="headerlink" href="#seisflows-plugins-solver-io-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-seisflows.plugins.solver_io.adios">
+<span id="seisflows-plugins-solver-io-adios-module"></span><h2>seisflows.plugins.solver_io.adios module<a class="headerlink" href="#module-seisflows.plugins.solver_io.adios" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="seisflows.plugins.solver_io.adios.mread">
+<code class="descclassname">seisflows.plugins.solver_io.adios.</code><code class="descname">mread</code><span class="sig-paren">(</span><em>path</em>, <em>parameters</em>, <em>iproc</em>, <em>prefix=''</em>, <em>suffix=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/plugins/solver_io/adios.html#mread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.plugins.solver_io.adios.mread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiparameter read, callable by a single mpi process</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="seisflows.plugins.solver_io.adios.read">
+<code class="descclassname">seisflows.plugins.solver_io.adios.</code><code class="descname">read</code><span class="sig-paren">(</span><em>path</em>, <em>parameter</em>, <em>iproc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/plugins/solver_io/adios.html#read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.plugins.solver_io.adios.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads from ADIOS container</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="seisflows.plugins.solver_io.adios.write">
+<code class="descclassname">seisflows.plugins.solver_io.adios.</code><code class="descname">write</code><span class="sig-paren">(</span><em>v</em>, <em>path</em>, <em>parameter</em>, <em>iproc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/plugins/solver_io/adios.html#write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.plugins.solver_io.adios.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes to ADIOS container</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.plugins.solver_io.fortran_binary">
+<span id="seisflows-plugins-solver-io-fortran-binary-module"></span><h2>seisflows.plugins.solver_io.fortran_binary module<a class="headerlink" href="#module-seisflows.plugins.solver_io.fortran_binary" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="seisflows.plugins.solver_io.fortran_binary.copy_slice">
+<code class="descclassname">seisflows.plugins.solver_io.fortran_binary.</code><code class="descname">copy_slice</code><span class="sig-paren">(</span><em>src</em>, <em>dst</em>, <em>iproc</em>, <em>parameter</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/plugins/solver_io/fortran_binary.html#copy_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.plugins.solver_io.fortran_binary.copy_slice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies SPECFEM model slice</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="seisflows.plugins.solver_io.fortran_binary.read_slice">
+<code class="descclassname">seisflows.plugins.solver_io.fortran_binary.</code><code class="descname">read_slice</code><span class="sig-paren">(</span><em>path</em>, <em>parameters</em>, <em>iproc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/plugins/solver_io/fortran_binary.html#read_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.plugins.solver_io.fortran_binary.read_slice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads SPECFEM model slice(s)
+Such as, for example : proc000005_vp.bin
+In that specific case it would be : read_slice(path, ‘vp’, 5)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="seisflows.plugins.solver_io.fortran_binary.write_slice">
+<code class="descclassname">seisflows.plugins.solver_io.fortran_binary.</code><code class="descname">write_slice</code><span class="sig-paren">(</span><em>data</em>, <em>path</em>, <em>parameters</em>, <em>iproc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/plugins/solver_io/fortran_binary.html#write_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.plugins.solver_io.fortran_binary.write_slice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes SPECFEM model slice</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">seisflows.plugins.solver_io package</a><ul>
+<li><a class="reference internal" href="#module-seisflows.plugins.solver_io.adios">seisflows.plugins.solver_io.adios module</a></li>
+<li><a class="reference internal" href="#module-seisflows.plugins.solver_io.fortran_binary">seisflows.plugins.solver_io.fortran_binary module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="seisflows.plugins.solver.html"
+                        title="previous chapter">seisflows.plugins.solver package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="seisflows.postprocess.html"
+                        title="next chapter">seisflows.postprocess package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ref/seisflows.plugins.solver_io.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="seisflows.postprocess.html" title="seisflows.postprocess package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="seisflows.plugins.solver.html" title="seisflows.plugins.solver package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="seisflows.html" >seisflows.config module</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="seisflows.plugins.html" >seisflows.plugins package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Princeton University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>seisflows.system.serial &#8212; SeisFlows 0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for seisflows.system.serial</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># This is Seisflows</span>
+<span class="c1">#</span>
+<span class="c1"># See LICENCE file</span>
+<span class="c1">#</span>
+<span class="c1">###############################################################################</span>
+
+<span class="c1"># Import system modules</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">abspath</span><span class="p">,</span> <span class="n">basename</span><span class="p">,</span> <span class="n">join</span>
+
+<span class="c1"># Import Numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Local imports</span>
+<span class="kn">from</span> <span class="nn">seisflows.tools</span> <span class="k">import</span> <span class="n">unix</span>
+<span class="kn">from</span> <span class="nn">seisflows.config</span> <span class="k">import</span> <span class="n">ParameterError</span><span class="p">,</span> <span class="n">custom_import</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">PAR</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;seisflows_parameters&#39;</span><span class="p">]</span>
+    <span class="n">PATH</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;seisflows_paths&#39;</span><span class="p">]</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check parameters and paths.&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="serial"><a class="viewcode-back" href="../../../ref/seisflows.system.html#seisflows.system.serial.serial">[docs]</a><span class="k">class</span> <span class="nc">serial</span><span class="p">(</span><span class="n">custom_import</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;base&#39;</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot; An interface through which to submit workflows, run tasks in serial or</span>
+<span class="sd">      parallel, and perform other system functions.</span>
+
+<span class="sd">      By hiding environment details behind a python interface layer, these</span>
+<span class="sd">      classes provide a consistent command set across different computing</span>
+<span class="sd">      environments.</span>
+
+<span class="sd">      For important additional information, please see</span>
+<span class="sd">      http://seisflows.readthedocs.org/en/latest/manual/manual.html#system-configuration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="serial.check"><a class="viewcode-back" href="../../../ref/seisflows.system.html#seisflows.system.serial.serial.check">[docs]</a>    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Checks parameters and paths</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># name of job</span>
+        <span class="k">if</span> <span class="s1">&#39;TITLE&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAR</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PAR</span><span class="p">,</span> <span class="s1">&#39;TITLE&#39;</span><span class="p">,</span> <span class="n">basename</span><span class="p">(</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)))</span>
+
+        <span class="c1"># number of tasks</span>
+        <span class="k">if</span> <span class="s1">&#39;NTASK&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAR</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PAR</span><span class="p">,</span> <span class="s1">&#39;NTASK&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># number of processers per task</span>
+        <span class="k">if</span> <span class="s1">&#39;NPROC&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAR</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PAR</span><span class="p">,</span> <span class="s1">&#39;NPROC&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># how to invoke executables</span>
+        <span class="k">if</span> <span class="s1">&#39;MPIEXEC&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAR</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PAR</span><span class="p">,</span> <span class="s1">&#39;MPIEXEC&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># level of detail in output messages</span>
+        <span class="k">if</span> <span class="s1">&#39;VERBOSE&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAR</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PAR</span><span class="p">,</span> <span class="s1">&#39;VERBOSE&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># where job was submitted</span>
+        <span class="k">if</span> <span class="s1">&#39;WORKDIR&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PATH</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span> <span class="s1">&#39;WORKDIR&#39;</span><span class="p">,</span> <span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
+
+        <span class="c1"># where output files are written</span>
+        <span class="k">if</span> <span class="s1">&#39;OUTPUT&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PATH</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span> <span class="s1">&#39;OUTPUT&#39;</span><span class="p">,</span> <span class="n">PATH</span><span class="o">.</span><span class="n">WORKDIR</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="s1">&#39;output&#39;</span><span class="p">)</span>
+
+        <span class="c1"># where temporary files are written</span>
+        <span class="k">if</span> <span class="s1">&#39;SCRATCH&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PATH</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span> <span class="s1">&#39;SCRATCH&#39;</span><span class="p">,</span> <span class="n">PATH</span><span class="o">.</span><span class="n">WORKDIR</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="s1">&#39;scratch&#39;</span><span class="p">)</span>
+
+        <span class="c1"># where system files are written</span>
+        <span class="k">if</span> <span class="s1">&#39;SYSTEM&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PATH</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span> <span class="s1">&#39;SYSTEM&#39;</span><span class="p">,</span> <span class="n">PATH</span><span class="o">.</span><span class="n">SCRATCH</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
+
+        <span class="c1"># optional local filesystem scratch path</span>
+        <span class="k">if</span> <span class="s1">&#39;LOCAL&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PATH</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span> <span class="s1">&#39;LOCAL&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="serial.submit"><a class="viewcode-back" href="../../../ref/seisflows.system.html#seisflows.system.serial.serial.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Submits job</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># create scratch, scratch/system and output directories</span>
+        <span class="n">unix</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">PATH</span><span class="o">.</span><span class="n">SCRATCH</span><span class="p">)</span>
+        <span class="n">unix</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">PATH</span><span class="o">.</span><span class="n">SYSTEM</span><span class="p">)</span>
+        <span class="n">unix</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">PATH</span><span class="o">.</span><span class="n">OUTPUT</span><span class="p">)</span>
+
+        <span class="c1"># saves results from current model update iteration</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">()</span>
+
+        <span class="c1"># execute workflow</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">main</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="serial.run"><a class="viewcode-back" href="../../../ref/seisflows.system.html#seisflows.system.serial.serial.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classname</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">hosts</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Executes method from classname multiple times in serial</span>
+<span class="sd">            taskid is used to identified a given task (one source)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unix</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">PATH</span><span class="o">.</span><span class="n">SYSTEM</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">taskid</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">PAR</span><span class="o">.</span><span class="n">NTASK</span><span class="p">):</span>
+            <span class="c1"># set environment variable SEISFLOWS_TASKID to taskid :</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SEISFLOWS_TASKID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">taskid</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">PAR</span><span class="o">.</span><span class="n">VERBOSE</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">(</span><span class="n">taskid</span><span class="p">)</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">__import__</span><span class="p">(</span><span class="s1">&#39;seisflows_&#39;</span><span class="o">+</span><span class="n">classname</span><span class="p">),</span> <span class="n">method</span><span class="p">)</span>
+            <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="serial.run_single"><a class="viewcode-back" href="../../../ref/seisflows.system.html#seisflows.system.serial.serial.run_single">[docs]</a>    <span class="k">def</span> <span class="nf">run_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classname</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Runs task a single time</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># set environment variable SEISFLOWS_TASKID to 0 :</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SEISFLOWS_TASKID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">__import__</span><span class="p">(</span><span class="s1">&#39;seisflows_&#39;</span><span class="o">+</span><span class="n">classname</span><span class="p">),</span> <span class="n">method</span><span class="p">)</span>
+        <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="serial.taskid"><a class="viewcode-back" href="../../../ref/seisflows.system.html#seisflows.system.serial.serial.taskid">[docs]</a>    <span class="k">def</span> <span class="nf">taskid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return the value of the environment variable SEISFLOWS_TASKID</span>
+<span class="sd">            which provides a unique identifier for each running task</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SEISFLOWS_TASKID&#39;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="serial.mpiexec"><a class="viewcode-back" href="../../../ref/seisflows.system.html#seisflows.system.serial.serial.mpiexec">[docs]</a>    <span class="k">def</span> <span class="nf">mpiexec</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Specifies MPI executable used to invoke solver</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PAR</span><span class="o">.</span><span class="n">MPIEXEC</span></div>
+
+<div class="viewcode-block" id="serial.progress"><a class="viewcode-back" href="../../../ref/seisflows.system.html#seisflows.system.serial.serial.progress">[docs]</a>    <span class="k">def</span> <span class="nf">progress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taskid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Provides status update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">PAR</span><span class="o">.</span><span class="n">NTASK</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; task &#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%02d</span><span class="s1"> of </span><span class="si">%02d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">taskid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">PAR</span><span class="o">.</span><span class="n">NTASK</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; task running&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Princeton University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

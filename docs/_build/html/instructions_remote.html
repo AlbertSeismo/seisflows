@@ -1,0 +1,202 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1. Download SeisFlows &#8212; SeisFlows 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SeisFlows 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="download-seisflows">
+<h1>1. Download SeisFlows<a class="headerlink" href="#download-seisflows" title="Permalink to this headline">¶</a></h1>
+<p>To run SeisFlows you’ll need a Unix system with Python 2.7, Numpy, Scipy, Obspy and standard Unix utilities.  After these prerequisites are in place, from the command line type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">~/</span><span class="n">packages</span>
+<span class="n">cd</span> <span class="o">~/</span><span class="n">packages</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">rmodrak</span><span class="o">/</span><span class="n">seisflows</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>If you prefer a location other than <code class="docutils literal notranslate"><span class="pre">~/packages</span></code> , modify the commands above and below accordingly.</p>
+</div>
+<div class="section" id="set-environment-variables">
+<h1>2. Set environment variables<a class="headerlink" href="#set-environment-variables" title="Permalink to this headline">¶</a></h1>
+<p>Add the following lines to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> (modify accordingly, if you are using a shell other than bash):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PATH=$PATH:~/packages/seisflows/scripts
+export PYTHONPATH=~/packages/seisflows
+</pre></div>
+</div>
+<p>Don’t forget to update any open shells:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">~/.</span><span class="n">bashrc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-system-test">
+<h1>3. Run “system” test<a class="headerlink" href="#run-system-test" title="Permalink to this headline">¶</a></h1>
+<p>Run the following test to make sure everything is working:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">packages</span><span class="o">/</span><span class="n">seisflows</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">run_test_system</span>
+</pre></div>
+</div>
+<p>If a ‘’hello’’ message is displayed, the test was successful.</p>
+</div>
+<div class="section" id="run-nonlinear-optimization-test">
+<h1>4. Run nonlinear optimization test<a class="headerlink" href="#run-nonlinear-optimization-test" title="Permalink to this headline">¶</a></h1>
+<p>Run the following test to make sure everything is working:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">packages</span><span class="o">/</span><span class="n">seisflows</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">run_test_optimize</span>
+</pre></div>
+</div>
+<p>If the optimization problems are solved in 60 iterations or fewer, the test was successful.</p>
+</div>
+<div class="section" id="configure-and-compile-specfem2d">
+<h1>5. Configure and compile SPECFEM2D<a class="headerlink" href="#configure-and-compile-specfem2d" title="Permalink to this headline">¶</a></h1>
+<p>First, download SPECFEM2D from GitHub:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">packages</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="o">--</span><span class="n">branch</span> <span class="n">devel</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">geodynamics</span><span class="o">/</span><span class="n">specfem2d</span><span class="o">.</span><span class="n">git</span> <span class="n">specfem2d</span><span class="o">-</span><span class="n">d745c542</span>
+<span class="n">cd</span> <span class="n">specfem2d</span><span class="o">-</span><span class="n">d745c542</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">d745c542</span>
+</pre></div>
+</div>
+<p>For now, it is important to work with the exact version specified above (<code class="docutils literal notranslate"><span class="pre">d745c542</span></code>). This is necessary because, unlike SPECFEM3D and 3D_GLOBE, SPECFEM2D development is sometimes a bit haphazard, with frequent interface changes.</p>
+<p>Next, configure and compile SPECFEM2D using ifort (preferred) or some other fortran compiler:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">packages</span><span class="o">/</span><span class="n">specfem2d</span><span class="o">-</span><span class="n">d745c542</span>
+<span class="o">./</span><span class="n">configure</span> <span class="n">FC</span><span class="o">=</span><span class="n">ifort</span>
+<span class="n">make</span> <span class="nb">all</span>
+</pre></div>
+</div>
+<p>(Since <cite>make</cite> by itself does not compile all the required utilities, be sure to remember to type <cite>make all</cite>.)  For troubleshooting any compilation issues, please view SPECFEM2D’s manual and GitHub issues page.</p>
+</div>
+<div class="section" id="set-up-checkerboard-test">
+<h1>6. Set up checkerboard test<a class="headerlink" href="#set-up-checkerboard-test" title="Permalink to this headline">¶</a></h1>
+<p><em>Note: the princeton.edu file hosting account has expired, and so these instructions have changed slightly.</em></p>
+<p>Download the starting model and other input files from <cite>GoogleDrive &lt;https://drive.google.com/open?id=1ow3LTYEvNn55yGeIV56sqaW-wXC0MtYW&gt;</cite>.  Unpack the archive using <code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">-xzf</span> <span class="pre">checkers.tgz</span></code>.</p>
+<p>After unpacking, make sure that all paths specified in <code class="docutils literal notranslate"><span class="pre">paths.py</span></code>  are correct.  For example, if you compiled SPECFEM2D somewhere other than <code class="docutils literal notranslate"><span class="pre">~/packages/specfem2d-d745c542</span></code>, you will need to modify the <code class="docutils literal notranslate"><span class="pre">SPECFEM2D_BIN</span></code> entry accordingly.</p>
+<p>Next, take a minute to view the <code class="docutils literal notranslate"><span class="pre">parameters.py</span></code> file and note the close similarity between the first set of parameters and the <a class="reference external" href="https://github.com/PrincetonUniversity/seisflows/tree/master/seisflows">directory structure</a> of the SeisFlows repository.</p>
+</div>
+<div class="section" id="run-checkerboard-test-in-serial">
+<h1>7. Run checkerboard test in serial<a class="headerlink" href="#run-checkerboard-test-in-serial" title="Permalink to this headline">¶</a></h1>
+<p>To run the checkerboard test type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sfclean</span> <span class="p">;</span> <span class="n">sfrun</span>
+</pre></div>
+</div>
+<p>within <code class="docutils literal notranslate"><span class="pre">~/tests/checkers</span></code>.</p>
+<p>For now, the inversion will run only a single event on only a single processor.  Once we verify that everything is working correctly in this case, we can move on to multiple events and multiple processors by modifying <code class="docutils literal notranslate"><span class="pre">parameters.py</span></code>.</p>
+</div>
+<div class="section" id="run-checkerboard-test-in-parallel">
+<h1>8. Run checkerboard test in parallel<a class="headerlink" href="#run-checkerboard-test-in-parallel" title="Permalink to this headline">¶</a></h1>
+<p>On a laptop or desktop with multiple cores, the work of an inversion can be carried out in parallel.  To run the checkerboard example in parallel over events (that is, with multiple event simulations running at the same time on different cores), make the following changes to <code class="docutils literal notranslate"><span class="pre">parameters.py</span></code>:</p>
+<ul class="simple">
+<li>to invert all available events instead of just one event, change <code class="docutils literal notranslate"><span class="pre">NTASK</span></code> from <code class="docutils literal notranslate"><span class="pre">1</span></code> to <code class="docutils literal notranslate"><span class="pre">25</span></code></li>
+<li>change <code class="docutils literal notranslate"><span class="pre">SYSTEM</span></code> from <code class="docutils literal notranslate"><span class="pre">serial</span></code> to <code class="docutils literal notranslate"><span class="pre">multithreaded</span></code></li>
+<li>add a parameter <code class="docutils literal notranslate"><span class="pre">NPROCMAX</span></code> and set it to the number of cores available on your machine.</li>
+</ul>
+<p>Besides running in parallel over events, the work of an individual event simulation can be parallelized over model regions. See the SPECFEM3D user manual for more information. Both parallelization over events and over model regions can be used at the same time under SeisFlows.  The current example, however, illustrates only event parallelism.</p>
+<p>Besides <code class="docutils literal notranslate"><span class="pre">serial</span></code> and <code class="docutils literal notranslate"><span class="pre">multithreaded</span></code> settings for running SeisFlows on laptops and desktops, there are also PBS, SLURM, and LSF options for running on clusters. See <a class="reference external" href="http://seisflows.readthedocs.org/en/latest/usage/usage.html#system-configuration">here</a> for more information.</p>
+</div>
+<div class="section" id="visualize-inversion-results">
+<h1>9. Visualize inversion results<a class="headerlink" href="#visualize-inversion-results" title="Permalink to this headline">¶</a></h1>
+<p>Visualization requires software such as Pylab, Matlab, or Paraview.</p>
+<p>With any such software, one approach for plotting SPECFEM2D models or kernels is to interpolate from the unstructured numerical mesh on which the model parameters are defined to a uniform rectangular grid.  The Pylab script <a class="reference external" href="http://tigress-web.princeton.edu/~rmodrak/visualize/plot2d">plot2d</a> illustrates this approach.</p>
+<p>Another method is to compute a Delaunay triangulation and plot the model or kernel over the unstructured mesh itself.  A Pylab script <a class="reference external" href="http://tigress-web.princeton.edu/~rmodrak/visualize/plot2d_delaunay">plot2d_delaunay</a> is available for illustration.</p>
+<p>To plot results from the checkerboard example using <code class="docutils literal notranslate"><span class="pre">plot2d</span></code>, run the following command from the working directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot2d</span> <span class="n">output</span><span class="o">/</span><span class="n">model_init</span><span class="o">/</span><span class="n">proc000000_x</span><span class="o">.</span><span class="n">bin</span> \
+       <span class="n">output</span><span class="o">/</span><span class="n">model_init</span><span class="o">/</span><span class="n">proc000000_z</span><span class="o">.</span><span class="n">bin</span> \
+       <span class="n">output</span><span class="o">/</span><span class="n">model_0001</span><span class="o">/</span><span class="n">proc000000_vs</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>(The command line syntax is the same for the other script.)  For either script to work, Pylab must be installed and the Pylab backend properly configured. If you prefer visualization software other than Pylab, feel free to use the above scripts for reference in writing your plotting own tools.</p>
+</div>
+<div class="section" id="creating-your-own-examples">
+<h1>10. Creating your own examples<a class="headerlink" href="#creating-your-own-examples" title="Permalink to this headline">¶</a></h1>
+<p>With SeisFlows, wave simulations must be performed using an external software package such as SPECFEM2D or SPECFEM3D.  The ability to interface with external solvers ensures flexibility, and the choice of SPECFEM as a default option gives access to cutting-edge meshing and hardware accelaration capabilities.  However, the use of external package also creates additional work for the user because, to carry set up one’s own inversion, one must become familiar not only with the SeisFlows package, but also with a separate solver package.</p>
+<p>To move beyond the above checkerboard test case, familiarity with how to set up simulations with SPECFEM–in paricular with how to create models in SPECFEM’s idionsyncratic binary format–is essential.  <a class="reference external" href="https://github.com/rmodrak/seisflows/issues/83">Issue #83</a> may be helpful in this regard.  Trying the two other <a class="reference external" href="https://github.com/rmodrak/seisflows/blob/master/docs/index.rst#examples-available-for-download">examples available for download</a> may also be useful.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1. Download SeisFlows</a></li>
+<li><a class="reference internal" href="#set-environment-variables">2. Set environment variables</a></li>
+<li><a class="reference internal" href="#run-system-test">3. Run “system” test</a></li>
+<li><a class="reference internal" href="#run-nonlinear-optimization-test">4. Run nonlinear optimization test</a></li>
+<li><a class="reference internal" href="#configure-and-compile-specfem2d">5. Configure and compile SPECFEM2D</a></li>
+<li><a class="reference internal" href="#set-up-checkerboard-test">6. Set up checkerboard test</a></li>
+<li><a class="reference internal" href="#run-checkerboard-test-in-serial">7. Run checkerboard test in serial</a></li>
+<li><a class="reference internal" href="#run-checkerboard-test-in-parallel">8. Run checkerboard test in parallel</a></li>
+<li><a class="reference internal" href="#visualize-inversion-results">9. Visualize inversion results</a></li>
+<li><a class="reference internal" href="#creating-your-own-examples">10. Creating your own examples</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/instructions_remote.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SeisFlows 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Princeton University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,275 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Parameter Files: parameters.py &#8212; SeisFlows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples: Available For Download" href="example.html" />
+    <link rel="prev" title="Scripts" href="executable.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="example.html" title="Examples: Available For Download"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="executable.html" title="Scripts"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p>Before submitting jobs to the local server, parameters defined in <code class="docutils literal notranslate"><span class="pre">parameters.py</span></code> and <code class="docutils literal notranslate"><span class="pre">path.py</span></code> require a careful check, avoiding any unnecessary workload.</p>
+<div class="section" id="parameter-files-parameters-py">
+<h1>Parameter Files: <code class="docutils literal notranslate"><span class="pre">parameters.py</span></code><a class="headerlink" href="#parameter-files-parameters-py" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">parameters.py</span></code> contains a list of parameter names and values. Prior to a job being submitted, parameters are checked so that errors can be detected without loss of queue time or wall time. Parameters are stored in a dictionary that is accessible from anywhere in the Python code. By convention, all parameter names must be upper case. Parameter values can be floats, integers, strings or any other Python data type. Parameters can be listed in any order.</p>
+<p><code class="docutils literal notranslate"><span class="pre">General</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">TITLE</span></code>:</th><td class="field-body">Project title.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">WORKFLOW</span></code>:</th><td class="field-body">Workflow specified for seisflows. ‘inversion’ and ‘migration’ are currently supported.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SOLVER</span></code>:</th><td class="field-body">Time domain solver specified for seisflows. See <a class="reference internal" href="usage.html#solver"><span class="std std-ref">Solver Configuration</span></a> and <a class="reference internal" href="../ref/seisflows.solver.html#sfsolver"><span class="std std-ref">seisflows.solver package</span></a> for supported options.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SYSTEM</span></code>:</th><td class="field-body">System type supported for seisflows. See <a class="reference internal" href="usage.html#system"><span class="std std-ref">System Configuration</span></a> and <a class="reference internal" href="../ref/seisflows.system.html#sfsystem"><span class="std std-ref">seisflows.system package</span></a> for supported options..</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">OPTIMIZE</span></code>:</th><td class="field-body">Optimization method used for inversion. See <a class="reference internal" href="../ref/seisflows.optimize.html#sfoptimize"><span class="std std-ref">seisflows.optimize package</span></a> for supported options.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">PREPROCESS</span></code>:</th><td class="field-body">Preprocessing workflow specified. See <a class="reference internal" href="../ref/seisflows.preprocess.html#sfpreprocess"><span class="std std-ref">seisflows.preprocess package</span></a> for supported options.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">POSTPROCESS</span></code>:</th><td class="field-body">Postprocessing workflow specified. ‘base’ needs to be specified.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">MISFIT</span></code>:</th><td class="field-body">Type of misfit for evaluation. See <a class="reference internal" href="../ref/seisflows.plugins.html#sfmisfit"><span class="std std-ref">seisflows.plugins.misfit module</span></a> for supported options.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">MATERIALS</span></code>:</th><td class="field-body">Materials of simulation domain. ‘Elastic’ and ‘Acoustic’ are currently supported. See seisflows.solver.base.</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Workflow</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">BEGIN</span></code>:</th><td class="field-body">First iteration index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">END</span></code>:</th><td class="field-body">Last iteration index.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">NREC</span></code>:</th><td class="field-body">Number of receivers.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">NSRC</span></code>:</th><td class="field-body">Number of sources. SEM source file needs to be stored with a six-digit index suffix.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SAVEMODEL</span></code>:</th><td class="field-body">Frequency of saving model. <code class="docutils literal notranslate"><span class="pre">1</span></code> by default.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SAVEGRADIENT</span></code>:</th><td class="field-body">Frequency of saving gradient. <code class="docutils literal notranslate"><span class="pre">1</span></code> by default.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SAVEKERNELS</span></code>:</th><td class="field-body">Frequency of saving kernels. <code class="docutils literal notranslate"><span class="pre">0</span></code> by default.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SAVETRACES</span></code>:</th><td class="field-body">Frequency of saving traces. <code class="docutils literal notranslate"><span class="pre">0</span></code> by default.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SAVERESIDUALS</span></code>:</th><td class="field-body">Frequency of saving residuals. <code class="docutils literal notranslate"><span class="pre">0</span></code> by default.</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Preprocessing</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">FORMAT</span></code>:</th><td class="field-body">Data file format.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">CHANNELS</span></code>:</th><td class="field-body">Data channels. Currenly, ‘su’, or ‘SU’ need to be specified.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">NORMALIZE</span></code>:</th><td class="field-body">Apply normalization for traces. ‘NormalizeEventsL1’, ‘NormalizeEventsL2’, ‘NormalizeTracesL1’, ‘NormalizeTracesL2’ are currently supported. See seisflows.preprocess.</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Filter</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">BANDPASS</span></code>:</th><td class="field-body">Boolean type bandpass switch for traces.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">FILTER</span></code>:</th><td class="field-body">Type of filter used. See <a class="reference internal" href="../ref/seisflows.preprocess.html#sfpreprocess"><span class="std std-ref">seisflows.preprocess package</span></a> for supported options.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">FREQMIN</span></code>:</th><td class="field-body">Low frequency corner.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">FREQMAX</span></code>:</th><td class="field-body">High frequency corner.</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Mute</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">MUTE</span></code>:</th><td class="field-body">List type switch for trace mute. <a class="reference internal" href="../ref/seisflows.preprocess.html#sfpreprocess"><span class="std std-ref">seisflows.preprocess package</span></a> for supported options.</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Postprocessing</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SMOOTH</span></code>:</th><td class="field-body">Smoothing radius. See <code class="docutils literal notranslate"><span class="pre">xsmooth_sem</span></code> for usage.</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Optimization</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">PRECOND</span></code>:</th><td class="field-body">Preconditioner type. See <a class="reference internal" href="#path"><span class="std std-ref">Path Files: paths.py</span></a> and <a class="reference internal" href="../ref/seisflows.plugins.preconds.html#sfprecond"><span class="std std-ref">seisflows.plugins.preconds.diagonal module</span></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">STEPMAX</span></code>:</th><td class="field-body">Maximum trial steps</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Solver</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">NT</span></code>:</th><td class="field-body">Number of time steps defined in Par_file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">DT</span></code>:</th><td class="field-body">Time step defined in Par_file.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">F0</span></code>:</th><td class="field-body">Dominant frequency defined in SOURCE.</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">System</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">NTASK</span></code>:</th><td class="field-body">Number of tasks submitted. Currently, <strong>NTASK</strong> must satisfy 1 &lt;= NTASK &lt;= NSRC.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">NPROC</span></code>:</th><td class="field-body">Number of processors.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">MPIEXEC</span></code>:</th><td class="field-body">MPI executable prefix, e.g., <code class="docutils literal notranslate"><span class="pre">mpirun</span> <span class="pre">-np</span> <span class="pre">13</span></code>. Note for a space at the end of the string, as seisflows concatenates the prefix with SPECFEM executable command.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="path-files-paths-py">
+<span id="path"></span><h1>Path Files: <code class="docutils literal notranslate"><span class="pre">paths.py</span></code><a class="headerlink" href="#path-files-paths-py" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">paths.py</span></code> contains a list of path names and values. Prior to a job being submitted, paths are checked so that errors can be detected without loss of queue time or wall time. Paths are stored in a dictionary that is accessible from anywhere in the Python code. By convention, all names must be upper case, and all values must be absolute paths. Paths can be listed in any order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">DATA</span></code>:</th><td class="field-body">PATH contains seismic data if field data is used for inversion. Data of difference sources should be stored in separate folder. If <code class="docutils literal notranslate"><span class="pre">DATA</span></code> directory does not exist, seisflows would automatically generate synthetic data using model from <code class="docutils literal notranslate"><span class="pre">MODEL_TRUE</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">MODEL_INIT</span></code>:</th><td class="field-body">PATH contains model file for initial iteraion.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">MODEL_TRUE</span></code>:</th><td class="field-body">PATH contains true model for generating synthetic data.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">PRECOND</span></code>:</th><td class="field-body">PATH to user supplied diagonal preconditioner. Seisflows will rescale model parameters based on user supplied weights. See <a class="reference internal" href="../ref/seisflows.plugins.preconds.html#sfprecond"><span class="std std-ref">seisflows.plugins.preconds.diagonal module</span></a>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">MASK</span></code>:</th><td class="field-body">PATH to mask file for gradient scaling. Mask needs to be stored mimicking the file format in which models are stored.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SPECFEM_DATA</span></code>:</th><td class="field-body">PATH to SPECFEM <code class="docutils literal notranslate"><span class="pre">DATA</span></code> directory which contians Par_file, SOURCE, and other necessary inputs.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><code class="docutils literal notranslate"><span class="pre">SPECFEM_BIN</span></code>:</th><td class="field-body">PATH to SPECFEM <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory which contains binary executable command of SPECFEM solver.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Parameter Files: <code class="docutils literal notranslate"><span class="pre">parameters.py</span></code></a></li>
+<li><a class="reference internal" href="#path-files-paths-py">Path Files: <code class="docutils literal notranslate"><span class="pre">paths.py</span></code></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="executable.html"
+                        title="previous chapter">Scripts</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="example.html"
+                        title="next chapter">Examples: Available For Download</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/main/design_project.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="example.html" title="Examples: Available For Download"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="executable.html" title="Scripts"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Princeton University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

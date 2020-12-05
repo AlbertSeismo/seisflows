@@ -1,0 +1,191 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>seisflows.postprocess package &#8212; SeisFlows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="seisflows.preprocess package" href="seisflows.preprocess.html" />
+    <link rel="prev" title="seisflows.plugins.solver_io package" href="seisflows.plugins.solver_io.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="seisflows.preprocess.html" title="seisflows.preprocess package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="seisflows.plugins.solver_io.html" title="seisflows.plugins.solver_io package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="seisflows.html" accesskey="U">seisflows.config module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="seisflows-postprocess-package">
+<h1>seisflows.postprocess package<a class="headerlink" href="#seisflows-postprocess-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-seisflows.postprocess.base">
+<span id="seisflows-postprocess-base-module"></span><h2>seisflows.postprocess.base module<a class="headerlink" href="#module-seisflows.postprocess.base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.postprocess.base.base">
+<em class="property">class </em><code class="descclassname">seisflows.postprocess.base.</code><code class="descname">base</code><a class="reference internal" href="../_modules/seisflows/postprocess/base.html#base"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.postprocess.base.base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Regularization, smoothing, sharpening, masking and related operations
+on models or gradients</p>
+<dl class="method">
+<dt id="seisflows.postprocess.base.base.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/postprocess/base.html#base.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.postprocess.base.base.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.postprocess.base.base.process_kernels">
+<code class="descname">process_kernels</code><span class="sig-paren">(</span><em>path</em>, <em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/postprocess/base.html#base.process_kernels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.postprocess.base.base.process_kernels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sums kernels from individual sources, with optional smoothing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Input path:</th><td class="field-body">directory containing sensitivity kernels</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Input parameters:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">list of material parameters e.g. [‘vp’,’vs’]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.postprocess.base.base.setup">
+<code class="descname">setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/postprocess/base.html#base.setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.postprocess.base.base.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder for initialization or setup tasks</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.postprocess.base.base.write_gradient">
+<code class="descname">write_gradient</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/postprocess/base.html#base.write_gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.postprocess.base.base.write_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combines contributions from individual sources and material parameters
+to get the gradient, and optionally applies user-supplied scaling</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Input path:</th><td class="field-body">directory from which kernels are read and to which
+gradient is written</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.postprocess.default">
+<span id="seisflows-postprocess-default-module"></span><h2>seisflows.postprocess.default module<a class="headerlink" href="#module-seisflows.postprocess.default" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.postprocess.default.default">
+<em class="property">class </em><code class="descclassname">seisflows.postprocess.default.</code><code class="descname">default</code><a class="reference internal" href="../_modules/seisflows/postprocess/default.html#default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.postprocess.default.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.postprocess.base.base" title="seisflows.postprocess.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.postprocess.base.base</span></code></a></p>
+<p>Default postprocesing option</p>
+<p>Provides default image processing and regularization functions for models
+or gradients</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">seisflows.postprocess package</a><ul>
+<li><a class="reference internal" href="#module-seisflows.postprocess.base">seisflows.postprocess.base module</a></li>
+<li><a class="reference internal" href="#module-seisflows.postprocess.default">seisflows.postprocess.default module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="seisflows.plugins.solver_io.html"
+                        title="previous chapter">seisflows.plugins.solver_io package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="seisflows.preprocess.html"
+                        title="next chapter">seisflows.preprocess package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ref/seisflows.postprocess.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="seisflows.preprocess.html" title="seisflows.preprocess package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="seisflows.plugins.solver_io.html" title="seisflows.plugins.solver_io package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="seisflows.html" >seisflows.config module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Princeton University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

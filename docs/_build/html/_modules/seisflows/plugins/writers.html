@@ -1,0 +1,253 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>seisflows.plugins.writers &#8212; SeisFlows 0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for seisflows.plugins.writers</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># This is Seisflows</span>
+<span class="c1">#</span>
+<span class="c1"># See LICENCE file</span>
+<span class="c1">#</span>
+<span class="c1"># Functions to write signals to files  (using Obspy)</span>
+<span class="c1">#</span>
+<span class="c1"># SeisFlows uses obspy stream objects for holding and processing seismic data.</span>
+<span class="c1"># In some cases, obspy.read doesn&#39;t provide the desired behavior, so we</span>
+<span class="c1"># introduce an additonal level of indirection</span>
+<span class="c1">#</span>
+<span class="c1"># used by the PREPROCESS class and specified by the WRITER parameter</span>
+<span class="c1">#</span>
+<span class="c1">###############################################################################</span>
+
+<span class="c1"># Import system module</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># Import numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">PAR</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;seisflows_parameters&#39;</span><span class="p">]</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check parameters and paths.&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="su"><a class="viewcode-back" href="../../../ref/seisflows.plugins.html#seisflows.plugins.writers.su">[docs]</a><span class="k">def</span> <span class="nf">su</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Write Seismic Unix files.</span>
+<span class="sd">        Function writeBigSuFile is a hack to write a .su file when the number</span>
+<span class="sd">        of samples per trace is two big.</span>
+<span class="sd">        In the su format only 2 bytes per trace are dedicated to encoding for</span>
+<span class="sd">        the number of samples (as signed int, see:</span>
+<span class="sd">        http://lists.swapbytes.de/archives/obspy-users/2017-March/002359.html).</span>
+<span class="sd">        Even if it&#39;s an old format it&#39;s still extremely stupid.</span>
+<span class="sd">        This proove the lack of vision the designer of this format had at that</span>
+<span class="sd">        time. They could have chosen 8 bytes or 16 bytes it was no big deal...</span>
+<span class="sd">        They&#39;ve cost me a day&#39;s work.</span>
+<span class="sd">        But let us forget about the past. This limits the size of the</span>
+<span class="sd">        traces in the header to maximum 32768.</span>
+<span class="sd">        We use Obspy to write the file with dummy values there instead of the</span>
+<span class="sd">        real number of sample (that we now anyway : it is PAR.NT).</span>
+<span class="sd">        We thus rewrote a quick version of this function from Obspy replacing</span>
+<span class="sd">        the number of point by PAR.NT</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="c1"># work around obspy data type conversion</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="n">max_npts</span> <span class="o">=</span> <span class="mi">32767</span>
+    <span class="n">max_delta</span> <span class="o">=</span> <span class="mf">0.065535</span>
+    <span class="n">dummy_delta</span> <span class="o">=</span> <span class="n">max_delta</span>
+
+    <span class="k">if</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">delta</span> <span class="o">&gt;</span> <span class="n">max_delta</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">delta</span> <span class="o">=</span> <span class="n">dummy_delta</span>
+
+    <span class="c1"># write data to file</span>
+    <span class="c1"># if PAR.NT &lt; max_npts:</span>
+    <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;SU&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">writeBigSuFile</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">path</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">filename</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ascii"><a class="viewcode-back" href="../../../ref/seisflows.plugins.html#seisflows.plugins.writers.ascii">[docs]</a><span class="k">def</span> <span class="nf">ascii</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">filenames</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Write ascii signal file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">ir</span><span class="p">,</span> <span class="n">tr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+        <span class="n">nt</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">npts</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span><span class="p">)</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">+</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">npts</span><span class="o">*</span><span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">sampling_rate</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">nt</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">data</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                   <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">t</span><span class="p">,</span> <span class="n">w</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="writeBigSuFile"><a class="viewcode-back" href="../../../ref/seisflows.plugins.html#seisflows.plugins.writers.writeBigSuFile">[docs]</a><span class="k">def</span> <span class="nf">writeBigSuFile</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;&lt;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; This function is a hack to write a .su file when the number</span>
+<span class="sd">        of samples per trace is two big.</span>
+<span class="sd">        In the su format only 2 bytes per trace are dedicated to encoding for</span>
+<span class="sd">        the number of samples (as signed int, see:</span>
+<span class="sd">        http://lists.swapbytes.de/archives/obspy-users/2017-March/002359.html).</span>
+<span class="sd">        Even if it&#39;s an old format it&#39;s still extremely stupid.</span>
+<span class="sd">        This proove the lack of vision the designer of this format had at that</span>
+<span class="sd">        time. They could have chosen 8 bytes or 16 bytes it was no big deal...</span>
+<span class="sd">        They&#39;ve cost me a day&#39;s work.</span>
+<span class="sd">        But let us forget about the past. This limits the size of the</span>
+<span class="sd">        traces in the header to maximum 32768.</span>
+<span class="sd">        We use Obspy to write the file with dummy values there instead of the</span>
+<span class="sd">        real number of sample (that we now anyway : it is PAR.NT).</span>
+<span class="sd">        We thus rewrote a quick version of this function from Obspy replacing</span>
+<span class="sd">        the number of point by PAR.NT</span>
+<span class="sd">        This is mostly copy-pastes from Obspy source code</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">from</span> <span class="nn">obspy.core.utcdatetime</span> <span class="k">import</span> <span class="n">UTCDateTime</span>
+    <span class="kn">from</span> <span class="nn">obspy.core.util</span> <span class="k">import</span> <span class="n">AttribDict</span>
+    <span class="kn">from</span> <span class="nn">obspy.io.segy.core</span> <span class="k">import</span> <span class="n">SUFile</span>
+    <span class="kn">from</span> <span class="nn">obspy.io.segy.segy</span> <span class="k">import</span> <span class="n">SEGYWritingError</span>
+    <span class="kn">from</span> <span class="nn">obspy.io.segy.segy</span> <span class="k">import</span> <span class="n">SEGYTrace</span>
+    <span class="kn">from</span> <span class="nn">obspy.io.segy.segy</span> <span class="k">import</span> <span class="n">SEGYTraceHeader</span>
+    <span class="kn">from</span> <span class="nn">obspy.io.segy.header</span> <span class="k">import</span> <span class="n">TRACE_HEADER_FORMAT</span>
+    <span class="kn">from</span> <span class="nn">obspy.io.segy.header</span> <span class="k">import</span> <span class="n">DATA_SAMPLE_FORMAT_PACK_FUNCTIONS</span>
+    
+
+    <span class="n">dummy_npts</span> <span class="o">=</span> <span class="mi">9999</span>
+    <span class="n">su_file</span> <span class="o">=</span> <span class="n">SUFile</span><span class="p">()</span>
+
+    <span class="c1"># Add all traces</span>
+    <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="n">new_trace</span> <span class="o">=</span> <span class="n">SEGYTrace</span><span class="p">()</span>
+        <span class="n">new_trace</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">data</span>
+        <span class="c1"># Use header saved in stats if one exists.</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="p">,</span> <span class="s1">&#39;segy&#39;</span><span class="p">)</span> <span class="ow">and</span> \
+           <span class="nb">hasattr</span><span class="p">(</span><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">segy</span><span class="p">,</span> <span class="s1">&#39;trace_header&#39;</span><span class="p">):</span>
+            <span class="n">this_trace_header</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">segy</span><span class="o">.</span><span class="n">trace_header</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">this_trace_header</span> <span class="o">=</span> <span class="n">SEGYTraceHeader</span><span class="p">()</span>
+        <span class="n">new_trace_header</span> <span class="o">=</span> <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span>
+        <span class="c1"># Again loop over all field of the trace header and if they exists, set</span>
+        <span class="c1"># them. Ignore all additional attributes.</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">TRACE_HEADER_FORMAT</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">this_trace_header</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">new_trace_header</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span>
+                        <span class="nb">getattr</span><span class="p">(</span><span class="n">this_trace_header</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
+        <span class="n">starttime</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span>
+        <span class="c1"># Set some special attributes, e.g. the sample count and other stuff.</span>
+        <span class="n">new_trace_header</span><span class="o">.</span><span class="n">number_of_samples_in_this_trace</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">npts</span>
+        <span class="n">new_trace_header</span><span class="o">.</span><span class="n">sample_interval_in_ms_for_this_trace</span> <span class="o">=</span> \
+            <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">delta</span> <span class="o">*</span> <span class="mf">1E6</span><span class="p">)))</span>
+        <span class="c1"># Set the date of the Trace if it is not UTCDateTime(0).</span>
+        <span class="k">if</span> <span class="n">starttime</span> <span class="o">==</span> <span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">year_data_recorded</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">day_of_year</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">hour_of_day</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">minute_of_hour</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">second_of_minute</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">year_data_recorded</span> <span class="o">=</span> <span class="n">starttime</span><span class="o">.</span><span class="n">year</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">day_of_year</span> <span class="o">=</span> <span class="n">starttime</span><span class="o">.</span><span class="n">julday</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">hour_of_day</span> <span class="o">=</span> <span class="n">starttime</span><span class="o">.</span><span class="n">hour</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">minute_of_hour</span> <span class="o">=</span> <span class="n">starttime</span><span class="o">.</span><span class="n">minute</span>
+            <span class="n">new_trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">second_of_minute</span> <span class="o">=</span> <span class="n">starttime</span><span class="o">.</span><span class="n">second</span>
+        <span class="c1"># Set the data encoding and the endianness.</span>
+        <span class="n">new_trace</span><span class="o">.</span><span class="n">endian</span> <span class="o">=</span> <span class="n">byteorder</span>
+        <span class="c1"># Add the trace to the SEGYFile object.</span>
+        <span class="n">su_file</span><span class="o">.</span><span class="n">traces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_trace</span><span class="p">)</span>
+
+    <span class="c1"># Write the file</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">su_file</span><span class="o">.</span><span class="n">traces</span><span class="p">:</span>
+        <span class="n">trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">number_of_samples_in_this_trace</span> <span class="o">=</span> <span class="n">dummy_npts</span>
+        <span class="n">endian</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">endian</span>
+        <span class="n">data_encoding</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="c1"># Write the header.</span>
+        <span class="n">trace</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">endian</span><span class="o">=</span><span class="n">endian</span><span class="p">)</span>
+        <span class="c1"># Write the data.</span>
+        <span class="k">if</span> <span class="n">trace</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No data in the SEGYTrace.&quot;</span>
+            <span class="k">raise</span> <span class="n">SEGYWritingError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">DATA_SAMPLE_FORMAT_PACK_FUNCTIONS</span><span class="p">[</span><span class="n">data_encoding</span><span class="p">](</span><span class="n">file</span><span class="p">,</span> <span class="n">trace</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                                                         <span class="n">endian</span><span class="o">=</span><span class="n">endian</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Princeton University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

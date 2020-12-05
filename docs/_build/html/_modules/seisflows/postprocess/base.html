@@ -1,0 +1,222 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>seisflows.postprocess.base &#8212; SeisFlows 0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for seisflows.postprocess.base</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># This is Seisflows</span>
+<span class="c1">#</span>
+<span class="c1"># See LICENCE file</span>
+<span class="c1">#</span>
+<span class="c1">###############################################################################</span>
+
+<span class="c1"># Import system modules</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># Import Numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Local imports</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">seisflows.tools</span> <span class="k">import</span> <span class="n">unix</span>
+<span class="kn">from</span> <span class="nn">seisflows.tools.tools</span> <span class="k">import</span> <span class="n">exists</span>
+<span class="kn">from</span> <span class="nn">seisflows.config</span> <span class="k">import</span> <span class="n">ParameterError</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">PAR</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;seisflows_parameters&#39;</span><span class="p">]</span>
+    <span class="n">PATH</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;seisflows_paths&#39;</span><span class="p">]</span>
+<span class="c1">#optimize = sys.modules[&#39;seisflows_optimize&#39;]</span>
+
+    <span class="n">system</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;seisflows_system&#39;</span><span class="p">]</span>
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;seisflows_solver&#39;</span><span class="p">]</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check parameters and paths.&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="base"><a class="viewcode-back" href="../../../ref/seisflows.postprocess.html#seisflows.postprocess.base.base">[docs]</a><span class="k">class</span> <span class="nc">base</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Regularization, smoothing, sharpening, masking and related operations</span>
+<span class="sd">      on models or gradients</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="base.check"><a class="viewcode-back" href="../../../ref/seisflows.postprocess.html#seisflows.postprocess.base.base.check">[docs]</a>    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Checks parameters and paths</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;SMOOTH&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAR</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PAR</span><span class="p">,</span> <span class="s1">&#39;SMOOTH&#39;</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;MASK&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PATH</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span> <span class="s1">&#39;MASK&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">PATH</span><span class="o">.</span><span class="n">MASK</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">exists</span><span class="p">(</span><span class="n">PATH</span><span class="o">.</span><span class="n">MASK</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="base.setup"><a class="viewcode-back" href="../../../ref/seisflows.postprocess.html#seisflows.postprocess.base.base.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Placeholder for initialization or setup tasks</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="base.write_gradient"><a class="viewcode-back" href="../../../ref/seisflows.postprocess.html#seisflows.postprocess.base.base.write_gradient">[docs]</a>    <span class="k">def</span> <span class="nf">write_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Combines contributions from individual sources and material parameters</span>
+<span class="sd">        to get the gradient, and optionally applies user-supplied scaling</span>
+
+<span class="sd">        :input path: directory from which kernels are read and to which</span>
+<span class="sd">                     gradient is written</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span>
+
+        <span class="c1"># because processing operations can be quite expensive, they must be</span>
+        <span class="c1"># run through the HPC system interface; processing does not involve</span>
+        <span class="c1"># embarassingly parallel tasks, we use system.run_single instead of</span>
+        <span class="c1"># system.run</span>
+
+        <span class="c1">#Here&#39;s where run smooth process.</span>
+        <span class="n">system</span><span class="o">.</span><span class="n">run_single</span><span class="p">(</span><span class="s1">&#39;postprocess&#39;</span><span class="p">,</span> <span class="s1">&#39;process_kernels&#39;</span><span class="p">,</span>
+                          <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="o">+</span><span class="s1">&#39;/kernels&#39;</span><span class="p">,</span>
+                          <span class="n">parameters</span><span class="o">=</span><span class="n">solver</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+
+        <span class="n">gradient</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="s1">&#39;kernels/sum&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;_kernel&#39;</span><span class="p">)</span>
+
+        <span class="c1"># merge into a single vector</span>
+        <span class="n">gradient</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">gradient</span><span class="p">)</span>
+
+        <span class="c1"># convert to absolute perturbations, log dm --&gt; dm</span>
+        <span class="c1"># see Eq.13 Tromp et al 2005</span>
+        <span class="n">gradient</span> <span class="o">*=</span> <span class="n">solver</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;model&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">PATH</span><span class="o">.</span><span class="n">MASK</span><span class="p">:</span>
+            <span class="c1"># to scale the gradient, users can supply &quot;masks&quot; by exactly</span>
+            <span class="c1"># mimicking the file format in which models are stored</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">PATH</span><span class="o">.</span><span class="n">MASK</span><span class="p">))</span>
+
+            <span class="c1"># while both masking and preconditioning involve scaling the</span>
+            <span class="c1"># gradient, they are fundamentally different operations:</span>
+            <span class="c1"># masking is ad hoc, preconditioning is a change of variables;</span>
+            <span class="c1"># see Modrak &amp; Tromp 2016 GJI Seismic waveform inversion best</span>
+            <span class="c1"># practices: regional,global and exploration test cases</span>
+            <span class="n">solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">gradient</span><span class="p">),</span>
+                        <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;gradient_nomask&#39;</span><span class="p">,</span>
+                        <span class="n">parameters</span><span class="o">=</span><span class="n">solver</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span>
+                        <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;_kernel&#39;</span><span class="p">)</span>
+
+            <span class="n">solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">gradient</span><span class="o">*</span><span class="n">mask</span><span class="p">),</span>
+                        <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;gradient&#39;</span><span class="p">,</span>
+                        <span class="n">parameters</span><span class="o">=</span><span class="n">solver</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span>
+                        <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;_kernel&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">gradient</span><span class="p">),</span>
+                        <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;gradient&#39;</span><span class="p">,</span>
+                        <span class="n">parameters</span><span class="o">=</span><span class="n">solver</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span>
+                        <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;_kernel&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="base.process_kernels"><a class="viewcode-back" href="../../../ref/seisflows.postprocess.html#seisflows.postprocess.base.base.process_kernels">[docs]</a>    <span class="k">def</span> <span class="nf">process_kernels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sums kernels from individual sources, with optional smoothing</span>
+
+<span class="sd">        :input path: directory containing sensitivity kernels</span>
+<span class="sd">        :input parameters: list of material parameters e.g. [&#39;vp&#39;,&#39;vs&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span>
+        
+        <span class="k">if</span> <span class="n">PAR</span><span class="o">.</span><span class="n">SMOOTH</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">solver</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span>
+                   <span class="n">input_path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+                   <span class="n">output_path</span><span class="o">=</span><span class="n">path</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="s1">&#39;sum_nosmooth&#39;</span><span class="p">,</span>
+                   <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+            <span class="c1">#if optimize.iter == 1:</span>
+            <span class="k">for</span> <span class="n">PROC</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">PAR</span><span class="o">.</span><span class="n">NPROC</span><span class="p">):</span>
+                <span class="n">unix</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">src</span> <span class="o">=</span> <span class="n">PATH</span><span class="o">.</span><span class="n">MODEL_INIT</span> <span class="o">+</span> <span class="s1">&#39;/proc</span><span class="si">%06d</span><span class="s1">_NSPEC_ibool.bin&#39;</span> <span class="o">%</span> <span class="n">PROC</span><span class="p">,</span> <span class="n">dst</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;sum_nosmooth&#39;</span><span class="o">+</span> <span class="s1">&#39;/proc</span><span class="si">%06d</span><span class="s1">_NSPEC_ibool.bin&#39;</span> <span class="o">%</span> <span class="n">PROC</span><span class="p">)</span>
+                <span class="n">unix</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">src</span> <span class="o">=</span> <span class="n">PATH</span><span class="o">.</span><span class="n">MODEL_INIT</span> <span class="o">+</span> <span class="s1">&#39;/proc</span><span class="si">%06d</span><span class="s1">_jacobian.bin&#39;</span> <span class="o">%</span> <span class="n">PROC</span><span class="p">,</span> <span class="n">dst</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;sum_nosmooth&#39;</span><span class="o">+</span> <span class="s1">&#39;/proc</span><span class="si">%06d</span><span class="s1">_jacobian.bin&#39;</span> <span class="o">%</span> <span class="n">PROC</span><span class="p">)</span>
+                <span class="n">unix</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">src</span> <span class="o">=</span> <span class="n">PATH</span><span class="o">.</span><span class="n">MODEL_INIT</span> <span class="o">+</span> <span class="s1">&#39;/proc</span><span class="si">%06d</span><span class="s1">_x.bin&#39;</span> <span class="o">%</span> <span class="n">PROC</span><span class="p">,</span> <span class="n">dst</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;sum_nosmooth&#39;</span><span class="o">+</span> <span class="s1">&#39;/proc</span><span class="si">%06d</span><span class="s1">_x.bin&#39;</span> <span class="o">%</span> <span class="n">PROC</span><span class="p">)</span>
+                <span class="n">unix</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">src</span> <span class="o">=</span> <span class="n">PATH</span><span class="o">.</span><span class="n">MODEL_INIT</span> <span class="o">+</span> <span class="s1">&#39;/proc</span><span class="si">%06d</span><span class="s1">_z.bin&#39;</span> <span class="o">%</span> <span class="n">PROC</span><span class="p">,</span> <span class="n">dst</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;sum_nosmooth&#39;</span><span class="o">+</span> <span class="s1">&#39;/proc</span><span class="si">%06d</span><span class="s1">_z.bin&#39;</span> <span class="o">%</span> <span class="n">PROC</span><span class="p">)</span>
+            <span class="n">solver</span><span class="o">.</span><span class="n">smooth</span><span class="p">(</span>
+                   <span class="n">input_path</span><span class="o">=</span><span class="n">path</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="s1">&#39;sum_nosmooth&#39;</span><span class="p">,</span>
+                   <span class="n">output_path</span><span class="o">=</span><span class="n">path</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+                   <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+                   <span class="n">span</span><span class="o">=</span><span class="n">PAR</span><span class="o">.</span><span class="n">SMOOTH</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">solver</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span>
+                   <span class="n">input_path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+                   <span class="n">output_path</span><span class="o">=</span><span class="n">path</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+                   <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Princeton University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,559 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>seisflows.workflow package &#8212; SeisFlows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="seisflows.tools package" href="seisflows.tools.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="seisflows.tools.html" title="seisflows.tools package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="seisflows.html" accesskey="U">seisflows.config module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="seisflows-workflow-package">
+<h1>seisflows.workflow package<a class="headerlink" href="#seisflows-workflow-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-seisflows.workflow.base">
+<span id="seisflows-workflow-base-module"></span><h2>seisflows.workflow.base module<a class="headerlink" href="#module-seisflows.workflow.base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.workflow.base.base">
+<em class="property">class </em><code class="descclassname">seisflows.workflow.base.</code><code class="descname">base</code><a class="reference internal" href="../_modules/seisflows/workflow/base.html#base"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.base.base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Workflow abstract base class</p>
+<dl class="method">
+<dt id="seisflows.workflow.base.base.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/base.html#base.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.base.base.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.base.base.checkpoint">
+<code class="descname">checkpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/base.html#base.checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.base.base.checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes information to disk so workflow can be resumed following a
+break</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.base.base.main">
+<code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/base.html#base.main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.base.base.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main routine</p>
+<p>Execution of a workflow is equivalent to stepping through
+workflow.main</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.workflow.inversion">
+<span id="seisflows-workflow-inversion-module"></span><h2>seisflows.workflow.inversion module<a class="headerlink" href="#module-seisflows.workflow.inversion" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.workflow.inversion.inversion">
+<em class="property">class </em><code class="descclassname">seisflows.workflow.inversion.</code><code class="descname">inversion</code><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.workflow.base.base" title="seisflows.workflow.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.workflow.base.base</span></code></a></p>
+<p>Waveform inversion base class</p>
+<p>Peforms iterative nonlinear inversion and provides a base class on top
+of which specialized strategies can be implemented.</p>
+<p>To allow customization, the inversion workflow is divided into generic
+methods such as ‘initialize’, ‘finalize’, ‘evaluate_function’,
+‘evaluate_gradient’, which can be easily overloaded.</p>
+<p>Calls to forward and adjoint solvers are abstracted through the ‘solver’
+interface so that various forward modeling packages can be used
+interchangeably.</p>
+<p>Commands for running in serial or parallel on a workstation or cluster
+are abstracted through the ‘system’ interface.</p>
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.checkpoint">
+<code class="descname">checkpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes information to disk so workflow can be resumed following a
+break</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.clean">
+<code class="descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cleans directories in which function and gradient evaluations were
+carried out</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.compute_direction">
+<code class="descname">compute_direction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.compute_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.compute_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes search direction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.evaluate_function">
+<code class="descname">evaluate_function</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.evaluate_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.evaluate_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs forward simulation to evaluate objective function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.evaluate_gradient">
+<code class="descname">evaluate_gradient</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.evaluate_gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.evaluate_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs adjoint simulation to evaluate gradient</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.finalize">
+<code class="descname">finalize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.finalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.finalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves results from current model update iteration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.initialize">
+<code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepares for next model update iteration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.line_search">
+<code class="descname">line_search</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.line_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.line_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conducts line search in given search direction</p>
+<dl class="docutils">
+<dt>Status codes</dt>
+<dd>status &gt; 0  : finished
+status == 0 : not finished
+status &lt; 0  : failed</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.main">
+<code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Carries out seismic inversion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.save_gradient">
+<code class="descname">save_gradient</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.save_gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.save_gradient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.save_kernels">
+<code class="descname">save_kernels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.save_kernels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.save_kernels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.save_model">
+<code class="descname">save_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.save_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.save_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.save_residuals">
+<code class="descname">save_residuals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.save_residuals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.save_residuals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.save_traces">
+<code class="descname">save_traces</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.save_traces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.save_traces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.setup">
+<code class="descname">setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lays groundwork for inversion.
+Runs setup method for preprocess, postprocess, optimize and also
+for the solver through the system: system.run(‘solver’,’setup’)
+This will copy user supplied data or generate it from a
+‘real’ model supplied
+This will setup the mesh for the initial model supplied
+If path LOCAL is supplied this is done even at iteration &gt; 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.write_gradient">
+<code class="descname">write_gradient</code><span class="sig-paren">(</span><em>path=''</em>, <em>suffix=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.write_gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.write_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes gradient in format expected by nonlinear optimization
+library</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.write_misfit">
+<code class="descname">write_misfit</code><span class="sig-paren">(</span><em>path=''</em>, <em>suffix=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.write_misfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.write_misfit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes misfit in format expected by nonlinear optimization library</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.inversion.inversion.write_model">
+<code class="descname">write_model</code><span class="sig-paren">(</span><em>path=''</em>, <em>suffix=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/inversion.html#inversion.write_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.inversion.inversion.write_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes model in format expected by solver</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.workflow.migration">
+<span id="seisflows-workflow-migration-module"></span><h2>seisflows.workflow.migration module<a class="headerlink" href="#module-seisflows.workflow.migration" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.workflow.migration.migration">
+<em class="property">class </em><code class="descclassname">seisflows.workflow.migration.</code><code class="descname">migration</code><a class="reference internal" href="../_modules/seisflows/workflow/migration.html#migration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.migration.migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.workflow.base.base" title="seisflows.workflow.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.workflow.base.base</span></code></a></p>
+<p>Migration base class.</p>
+<p>In the terminology of seismic exploration, implements a
+‘reverse time migration’.</p>
+<dl class="method">
+<dt id="seisflows.workflow.migration.migration.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/migration.html#migration.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.migration.migration.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.migration.migration.main">
+<code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/migration.html#migration.main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.migration.migration.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Migrates seismic data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.migration.migration.prepare_model">
+<code class="descname">prepare_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/migration.html#migration.prepare_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.migration.migration.prepare_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.migration.migration.save_kernels">
+<code class="descname">save_kernels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/migration.html#migration.save_kernels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.migration.migration.save_kernels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.migration.migration.save_kernels_sum">
+<code class="descname">save_kernels_sum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/migration.html#migration.save_kernels_sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.migration.migration.save_kernels_sum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.migration.migration.save_traces">
+<code class="descname">save_traces</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/migration.html#migration.save_traces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.migration.migration.save_traces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.workflow.test_adjoint">
+<span id="seisflows-workflow-test-adjoint-module"></span><h2>seisflows.workflow.test_adjoint module<a class="headerlink" href="#module-seisflows.workflow.test_adjoint" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="seisflows.workflow.test_adjoint.DotProductLHS">
+<code class="descclassname">seisflows.workflow.test_adjoint.</code><code class="descname">DotProductLHS</code><span class="sig-paren">(</span><em>keys</em>, <em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_adjoint.html#DotProductLHS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_adjoint.DotProductLHS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="seisflows.workflow.test_adjoint.DotProductRHS">
+<code class="descclassname">seisflows.workflow.test_adjoint.</code><code class="descname">DotProductRHS</code><span class="sig-paren">(</span><em>keys</em>, <em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_adjoint.html#DotProductRHS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_adjoint.DotProductRHS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="seisflows.workflow.test_adjoint.test_adjoint">
+<em class="property">class </em><code class="descclassname">seisflows.workflow.test_adjoint.</code><code class="descname">test_adjoint</code><a class="reference internal" href="../_modules/seisflows/workflow/test_adjoint.html#test_adjoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_adjoint.test_adjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.workflow.base.base" title="seisflows.workflow.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.workflow.base.base</span></code></a></p>
+<dl class="method">
+<dt id="seisflows.workflow.test_adjoint.test_adjoint.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_adjoint.html#test_adjoint.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_adjoint.test_adjoint.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="seisflows.workflow.test_adjoint.test_adjoint.event">
+<code class="descname">event</code><a class="headerlink" href="#seisflows.workflow.test_adjoint.test_adjoint.event" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_adjoint.test_adjoint.main">
+<code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_adjoint.html#test_adjoint.main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_adjoint.test_adjoint.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main routine</p>
+<p>Execution of a workflow is equivalent to stepping through
+workflow.main</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_adjoint.test_adjoint.prepare_model">
+<code class="descname">prepare_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_adjoint.html#test_adjoint.prepare_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_adjoint.test_adjoint.prepare_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.workflow.test_forward">
+<span id="seisflows-workflow-test-forward-module"></span><h2>seisflows.workflow.test_forward module<a class="headerlink" href="#module-seisflows.workflow.test_forward" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.workflow.test_forward.test_forward">
+<em class="property">class </em><code class="descclassname">seisflows.workflow.test_forward.</code><code class="descname">test_forward</code><a class="reference internal" href="../_modules/seisflows/workflow/test_forward.html#test_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_forward.test_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.workflow.base.base" title="seisflows.workflow.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.workflow.base.base</span></code></a></p>
+<p>Tests solver by running forward simulation</p>
+<dl class="method">
+<dt id="seisflows.workflow.test_forward.test_forward.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_forward.html#test_forward.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_forward.test_forward.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_forward.test_forward.main">
+<code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_forward.html#test_forward.main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_forward.test_forward.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates seismic data</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="seisflows-workflow-test-optimize-module">
+<h2>seisflows.workflow.test_optimize module<a class="headerlink" href="#seisflows-workflow-test-optimize-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-seisflows.workflow.test_postprocess">
+<span id="seisflows-workflow-test-postprocess-module"></span><h2>seisflows.workflow.test_postprocess module<a class="headerlink" href="#module-seisflows.workflow.test_postprocess" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.workflow.test_postprocess.test_postprocess">
+<em class="property">class </em><code class="descclassname">seisflows.workflow.test_postprocess.</code><code class="descname">test_postprocess</code><a class="reference internal" href="../_modules/seisflows/workflow/test_postprocess.html#test_postprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_postprocess.test_postprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.workflow.base.base" title="seisflows.workflow.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.workflow.base.base</span></code></a></p>
+<p>Postprocessing class</p>
+<dl class="method">
+<dt id="seisflows.workflow.test_postprocess.test_postprocess.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_postprocess.html#test_postprocess.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_postprocess.test_postprocess.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_postprocess.test_postprocess.main">
+<code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_postprocess.html#test_postprocess.main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_postprocess.test_postprocess.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes gradient of objective function</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.workflow.test_preprocess">
+<span id="seisflows-workflow-test-preprocess-module"></span><h2>seisflows.workflow.test_preprocess module<a class="headerlink" href="#module-seisflows.workflow.test_preprocess" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess">
+<em class="property">class </em><code class="descclassname">seisflows.workflow.test_preprocess.</code><code class="descname">test_preprocess</code><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.workflow.base.base" title="seisflows.workflow.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.workflow.base.base</span></code></a></p>
+<p>Signal processing integration test</p>
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.main">
+<code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests data processing methods</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>data</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.test_adjoint">
+<code class="descname">test_adjoint</code><span class="sig-paren">(</span><em>dat</em>, <em>syn</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.test_adjoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.test_adjoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.test_filter">
+<code class="descname">test_filter</code><span class="sig-paren">(</span><em>dat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.test_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.test_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.test_misfit">
+<code class="descname">test_misfit</code><span class="sig-paren">(</span><em>dat</em>, <em>syn</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.test_misfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.test_misfit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.test_mute">
+<code class="descname">test_mute</code><span class="sig-paren">(</span><em>dat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.test_mute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.test_mute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.test_normalize">
+<code class="descname">test_normalize</code><span class="sig-paren">(</span><em>dat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.test_normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.test_normalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.test_reader">
+<code class="descname">test_reader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.test_reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.test_reader" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_preprocess.test_preprocess.test_writer">
+<code class="descname">test_writer</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_preprocess.html#test_preprocess.test_writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_preprocess.test_preprocess.test_writer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.workflow.test_system">
+<span id="seisflows-workflow-test-system-module"></span><h2>seisflows.workflow.test_system module<a class="headerlink" href="#module-seisflows.workflow.test_system" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.workflow.test_system.test_system">
+<em class="property">class </em><code class="descclassname">seisflows.workflow.test_system.</code><code class="descname">test_system</code><a class="reference internal" href="../_modules/seisflows/workflow/test_system.html#test_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_system.test_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.workflow.base.base" title="seisflows.workflow.base.base"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.workflow.base.base</span></code></a></p>
+<p>Tests system interface</p>
+<dl class="method">
+<dt id="seisflows.workflow.test_system.test_system.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_system.html#test_system.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_system.test_system.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks parameters and paths</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_system.test_system.hello">
+<code class="descname">hello</code><span class="sig-paren">(</span><em>msg='Hello from %d'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_system.html#test_system.hello"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_system.test_system.hello" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints hello message</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.test_system.test_system.main">
+<code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/test_system.html#test_system.main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.test_system.test_system.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main routine</p>
+<p>Execution of a workflow is equivalent to stepping through
+workflow.main</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-seisflows.workflow.thrifty_inversion">
+<span id="seisflows-workflow-thrifty-inversion-module"></span><h2>seisflows.workflow.thrifty_inversion module<a class="headerlink" href="#module-seisflows.workflow.thrifty_inversion" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="seisflows.workflow.thrifty_inversion.thrifty_inversion">
+<em class="property">class </em><code class="descclassname">seisflows.workflow.thrifty_inversion.</code><code class="descname">thrifty_inversion</code><a class="reference internal" href="../_modules/seisflows/workflow/thrifty_inversion.html#thrifty_inversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.thrifty_inversion.thrifty_inversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#seisflows.workflow.inversion.inversion" title="seisflows.workflow.inversion.inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">seisflows.workflow.inversion.inversion</span></code></a></p>
+<p>Thrifty inversion subclass</p>
+<p>Provides savings over conventional inversion by carrying over forward
+simulations from line search</p>
+<p>The results of ‘inversion’ and ‘thrifty_inversion’ should be exactly the
+same</p>
+<dl class="method">
+<dt id="seisflows.workflow.thrifty_inversion.thrifty_inversion.clean">
+<code class="descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/thrifty_inversion.html#thrifty_inversion.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.thrifty_inversion.thrifty_inversion.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cleans directories in which function and gradient evaluations were
+carried out</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.thrifty_inversion.thrifty_inversion.initialize">
+<code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/thrifty_inversion.html#thrifty_inversion.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.thrifty_inversion.thrifty_inversion.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepares for next model update iteration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="seisflows.workflow.thrifty_inversion.thrifty_inversion.status">
+<code class="descname">status</code><em class="property"> = 0</em><a class="headerlink" href="#seisflows.workflow.thrifty_inversion.thrifty_inversion.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="seisflows.workflow.thrifty_inversion.thrifty_inversion.update_status">
+<code class="descname">update_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seisflows/workflow/thrifty_inversion.html#thrifty_inversion.update_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#seisflows.workflow.thrifty_inversion.thrifty_inversion.update_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">seisflows.workflow package</a><ul>
+<li><a class="reference internal" href="#module-seisflows.workflow.base">seisflows.workflow.base module</a></li>
+<li><a class="reference internal" href="#module-seisflows.workflow.inversion">seisflows.workflow.inversion module</a></li>
+<li><a class="reference internal" href="#module-seisflows.workflow.migration">seisflows.workflow.migration module</a></li>
+<li><a class="reference internal" href="#module-seisflows.workflow.test_adjoint">seisflows.workflow.test_adjoint module</a></li>
+<li><a class="reference internal" href="#module-seisflows.workflow.test_forward">seisflows.workflow.test_forward module</a></li>
+<li><a class="reference internal" href="#seisflows-workflow-test-optimize-module">seisflows.workflow.test_optimize module</a></li>
+<li><a class="reference internal" href="#module-seisflows.workflow.test_postprocess">seisflows.workflow.test_postprocess module</a></li>
+<li><a class="reference internal" href="#module-seisflows.workflow.test_preprocess">seisflows.workflow.test_preprocess module</a></li>
+<li><a class="reference internal" href="#module-seisflows.workflow.test_system">seisflows.workflow.test_system module</a></li>
+<li><a class="reference internal" href="#module-seisflows.workflow.thrifty_inversion">seisflows.workflow.thrifty_inversion module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="seisflows.tools.html"
+                        title="previous chapter">seisflows.tools package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ref/seisflows.workflow.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="seisflows.tools.html" title="seisflows.tools package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeisFlows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="seisflows.html" >seisflows.config module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Princeton University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>
