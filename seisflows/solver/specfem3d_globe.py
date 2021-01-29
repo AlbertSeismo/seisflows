@@ -17,15 +17,18 @@ import numpy as np
 
 # Local imports
 import seisflows.plugins.solver.specfem3d_globe as solvertools
-from seisflows.tools.seismic import getpar, setpar, Model, Minmax
-from seisflows.plugins.io import loadbypar, copybin, loadbin, savebin
+from seisflows.tools.seismic import getpar, setpar, Minmax
+# from seisflows.plugins.io import loadbypar, copybin, loadbin, savebin
 from seisflows.tools import unix
 from seisflows.tools.seismic import call_solver
 from seisflows.tools.tools import Struct, exists
 from seisflows.config import ParameterError, custom_import
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
+except:
+    print("Check parameters and paths.")
 
 
 class specfem3d_globe(custom_import('solver', 'base')):
@@ -33,18 +36,20 @@ class specfem3d_globe(custom_import('solver', 'base')):
 
       See base class for method descriptions
     """
-
-    if PAR.MATERIALS in ['Isotropic']:
-        parameters = []
-        parameters += ['vp']
-        parameters += ['vs']
-    else:
-        parameters = []
-        parameters += ['vpv']
-        parameters += ['vph']
-        parameters += ['vsv']
-        parameters += ['vsh']
-        parameters += ['eta']
+    try:
+        if PAR.MATERIALS in ['Isotropic']:
+            parameters = []
+            parameters += ['vp']
+            parameters += ['vs']
+        else:
+            parameters = []
+            parameters += ['vpv']
+            parameters += ['vph']
+            parameters += ['vsv']
+            parameters += ['vsh']
+            parameters += ['eta']
+    except:
+        print("Check parameters and paths.")
 
     def check(self):
         """ Checks parameters and paths
@@ -108,7 +113,9 @@ class specfem3d_globe(custom_import('solver', 'base')):
           Models are stored in Fortran binary format and separated into
           multiple files according to material parameter and processor rank.
         """
+        raise NotImplementedError
         model = Model(self.parameters)
+            
         minmax = Minmax(self.parameters)
 
         for iproc in range(self.mesh_properties.nproc):

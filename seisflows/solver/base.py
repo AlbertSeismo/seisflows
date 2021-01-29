@@ -374,7 +374,7 @@ class base(object):
         # Apply smoothing operator
         unix.cd(self.cwd)
         for name in parameters or self.parameters:
-            print('Smoothing ', name)
+            print('Smoothing ' + name)
             call_solver(
                 system.mpiexec(),
                 PATH.SPECFEM_BIN + '/' + 'xsmooth_sem '

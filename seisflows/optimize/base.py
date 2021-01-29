@@ -113,11 +113,11 @@ class base(object):
             assert PAR.STEPLENINIT < PAR.STEPLENMAX
 
 
-    def model_cutoff(self, m):
-        for i in range(len(m)):
-            if m[i] < PAR.CUTOFF_BOTTOM:
-                m[i] = PAR.CUTOFF_BOTTOM
-        return m
+    # def model_cutoff(self, m):
+    #     for i in range(len(m)):
+    #         if m[i] < PAR.CUTOFF_BOTTOM:
+    #             m[i] = PAR.CUTOFF_BOTTOM
+    #     return m
 
 
     def setup(self):

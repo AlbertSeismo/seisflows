@@ -21,11 +21,13 @@ from seisflows.workflow.base import base
 
 # Import rosenbrock
 import rosenbrock as problem
+try:
+    PAR = sys.modules['seisflows_parameters']
+    PATH = sys.modules['seisflows_paths']
 
-PAR = sys.modules['seisflows_parameters']
-PATH = sys.modules['seisflows_paths']
-
-optimize = sys.modules['seisflows_optimize']
+    optimize = sys.modules['seisflows_optimize']
+except:
+    print("Check parameters and paths.")
 
 
 class test_optimize(base):
@@ -78,7 +80,7 @@ class test_optimize(base):
         cls.setup()
 
         for cls.iter in range(PAR.BEGIN, PAR.END+1):
-            print('Starting iteration', cls.iter)
+            print('Starting iteration' + str(cls.iter))
             optimize.iter = cls.iter
 
             print("Computing search direction")

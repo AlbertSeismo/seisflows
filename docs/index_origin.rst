@@ -19,41 +19,46 @@ If you find this package useful, please cite:
 
 `Ryan Modrak, Jeroen Tromp; Seismic waveform inversion best practices: regional, global and exploration test cases, Geophysical Journal International, Volume 206, Issue 3, 1 September 2016, Pages 1864–1889, https://doi.org/10.1093/gji/ggw202`
 
+Overview
+--------
 
+.. toctree::
 
-开始
+   main/overview.rst
+
+Usage
 -----
 
 .. toctree::
    :maxdepth: 2
 
-   main_cn/usage.rst
+   main/usage.rst
 
-可执行程序
+Executable
 ----------
 
 .. toctree::
    :maxdepth: 2
 
-   main_cn/executable.rst
+   main/executable.rst
 
-设计项目
+Designing Project
 -----------------
 
 .. toctree::
    :maxdepth: 2
 
-   main_cn/design_project.rst
+   main/design_project.rst
 
-示例
+Example
 -------
 
 .. toctree::
    :maxdepth: 1
 
-   main_cn/example.rst
+   main/example.rst
 
-模块
+Module
 ------
 
 .. toctree::

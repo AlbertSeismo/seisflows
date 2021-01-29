@@ -125,7 +125,7 @@ class inversion(base):
         print('')
 
         while optimize.iter <= PAR.END:
-            print("Starting iteration", str(optimize.iter))
+            print("Starting iteration" + str(optimize.iter))
             self.initialize()
 
             print("Computing gradient")
@@ -193,7 +193,7 @@ class inversion(base):
         optimize.initialize_search()
 
         while True:
-            print(" trial step", optimize.line_search.step_count + 1)
+            print(" trial step" + str(optimize.line_search.step_count + 1))
             self.evaluate_function()
             status = optimize.update_search()
 

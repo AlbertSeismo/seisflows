@@ -1,14 +1,16 @@
 .. toctree::
    :maxdepth: 1
 
+
+   seisflows.system
+   seisflows.solver
+   seisflows.workflow
+   seisflows.preprocess
+   seisflows.postprocess
    seisflows.optimize
    seisflows.plugins
-   seisflows.postprocess
-   seisflows.preprocess
-   seisflows.solver
-   seisflows.system
    seisflows.tools
-   seisflows.workflow
+
 
 
 seisflows.config module
