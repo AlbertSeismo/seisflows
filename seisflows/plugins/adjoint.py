@@ -27,11 +27,20 @@ def Waveform(syn, obs, nt, dt):
 def Envelope(syn, obs, nt, dt, eps=0.05):
     """ Envelope difference (Yuan et al 2015, eq 16)
     """
-    esyn = abs(_analytic(syn))
-    eobs = abs(_analytic(obs))
-    etmp = (esyn - eobs)/(esyn + eps*esyn.max())
-    wadj = etmp*syn - _np.imag(_analytic(etmp*_np.imag(_analytic(syn))))
-    return wadj
+    #Bug fix by Yiyu Ni
+    #Jan. 21, 2021
+    #
+    #If offset mute is used, this code would possibly return NaN.
+    #Solve:
+
+    if sum(syn) == 0.:
+        return _np.zeros(nt)
+    else:
+        esyn = abs(_analytic(syn))
+        eobs = abs(_analytic(obs))
+        etmp = (esyn - eobs)/(esyn + eps*esyn.max())
+        wadj = etmp*syn - _np.imag(_analytic(etmp*_np.imag(_analytic(syn))))
+        return wadj
 
 
 def InstantaneousPhase(syn, obs, nt, dt, eps=0.05):
