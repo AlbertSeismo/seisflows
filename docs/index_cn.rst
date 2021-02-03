@@ -1,19 +1,14 @@
-.. SeisFlows documentation master file, created by
-   sphinx-quickstart on Thu Oct 16 14:47:24 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
-
-Preface
+前言
 -------
 
-This module is based on original version SeisFlows by Ryan Modrak at Princeton. 
+本文档基于普林斯顿大学Ryan Modrak编写的SeisFlows。
 
-Further version would contain manuals with more details articulated:
+本手册的更新与维护将会被commit到以下GitHub目录：
 
    git clone https://github.com/niyiyu2316/seisflows.git
 
-If you find this package useful, please cite:
+引用：
 
 `Ryan Modrak, Dmitry Borisov, Matthieu Lefebvre, Jeroen Tromp; SeisFlows—Flexible waveform inversion software, Computers & Geosciences, Volume 115, June 2018, Pages 88-95, https://doi.org/10.1016/j.cageo.2018.02.004`
 

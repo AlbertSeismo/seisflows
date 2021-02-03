@@ -1,29 +1,28 @@
 安装
 ============
 
-首先从GitHhub下载Seisflows代码::
+首先从GitHub下载Seisflows代码::
 
-    git clone https://github.com/rmodrak/seisflows.git
+    $ git clone https://github.com/rmodrak/seisflows.git
 
 
 设置环境变量。 将以下代码加入 ``.bashrc`` (如果使用其他shell，相应地改变)::
 
-    export PATH=$PATH:/path/to/seisflows/scripts
-    export PYTHONPATH=$PYTHONPATH:/path/to/seisflows
+    $ export PATH=$PATH:/path/to/seisflows/scripts
+    $ export PYTHONPATH=$PYTHONPATH:/path/to/seisflows
 
+根据SeisFlow的位置，``/path/to/seisflows/scripts`` 与 ``/path/to/seisflows`` 需要进行对应的调整。重新登陆，或使用::
+
+    $ source ~/.bashrc
+
+应用环境变量更改。应用后，请确保SeisFlow目录不再发生移动。
 
 依赖软件
 ======================
 
-SeisFlows需要Python 2.7以及相应的Numpy、Scipy和Obspy库支持。运行SeisFlows前需要提前安装这些库。
+SeisFlows需要Python 2.7以及相应的NumPy、SciPy和ObsPy库支持。运行SeisFlows前需要提前安装这些库。SeisFlows提供了若干程序测试，为确保其所需的依赖库能正常运行，这些测试必须通过，参见 :ref:`tests`
 
 正演程序需要提前编译，参考 :ref:`solver`。
-
-
-硬件要求
-======================
-
-Access to a computer cluster is required for most applications.  Base classes are provided for several common cluster configurations, including PBS and SLURM.  Nonstandard configurations can often be accommodated through modifications to one of the base classes; see :ref:`system` for details.
 
 
 .. _submission:
@@ -31,44 +30,52 @@ Access to a computer cluster is required for most applications.  Base classes ar
 任务提交
 ==============
 
-Each job must have it own `working directory` within which users must supply two input files, ``paths.py`` and ``parameters.py``.
-
-To begin executing a workflow, simply type ``sfrun`` within a working directory. If an ``inversion`` workflow and ``serial`` system configuration, for example, are specified in the parameters file, the inversion will begin executing immediately in serial. If a PBS, SLURM, or LSF system configuration is specified instead, execution may wait until required resources become available.
-
-Once the workflow starts running, status information is displayed to the terminal or to the file ``output.log``.  By default, updated models and other inversion results are output to the working directory.
-
+每一个SeisFlows的任务需要有其独立的目录，目录下必须有用户参数输入文档``paths.py`` 和 ``parameters.py`` 。在命令行该目录下输入 ``sfrun`` 即可开始执行一个任务。
 
 .. _solver:
 
 正演程序配置
 ====================
 
-SeisFlows includes Python interfaces for SPECFEM2D, SPECFEM3D, and SPECFEM3D_GLOBE.  While the Python interfaces are part of the SeisFlows package, the solver source code must be downloaded separately through GitHub.  
+SeisFlows包含为SPECFEM2D/3D/3D_GLOBE提供的python接口，而SEM的源代码则必须额外下载。  
 
-After downloading the solver source code, users must configure and compile it, following the instructions in the solver user manual. Summarized briefly, the configuration and compilation procedure is:
+首先，应当运行configure命令配置合适的Makefile。以下命令指定gfortran和gcc分别作为fortran和c的编译器，并提供mpi支持::
 
-Prior to compilation, users need to run the ``configure`` script and prepare input files such as
+    $ ./configure FC=gfortran CC=gcc --with-mpi
 
-- parameter file
+如果采用mpi，请确认mpif90命令调用与FC对应的编译器::
 
-- source file
+    $ mpif90 --version       
+    GNU Fortran (Homebrew GCC 10.2.0) 10.2.0
+    Copyright (C) 2020 Free Software Foundation, Inc.
+    This is free software; see the source for copying conditions.  There is NO
+    warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-- stations file.
+否则，请先将mpi调用进行变更::
 
-To successfully run the ``configure``, you may need to install compilers, libraries, and other software in your environment.
+        $ export OMPI_FC=gfortran
 
-The result of compilation is a set of binary executables, such as
+configure输出以下内容则成功::
 
-- mesher
+    ## ---------------- ##
+    ## Specfem 2D 7.0.0 ##
+    ## ---------------- ##
 
-- solver
+    ./configure has completed and set up a default configuration to build.
 
-- smoothing utility
+    You may wish to modify the following files before running a simulation:
+    DATA/Par_file           Set parameters affecting the simulation.
+    DATA/SOURCE             Set the source parameters before running the solver.
 
-- summing utility.
+编译specfem2d主程序::
 
+    $ make all -j 10   
 
-After compilation, solver input files must be gathered together in one directory and solver executables in another.  The absolute paths to the directories containing input files and executables must be given in ``paths.py``.
+完成编译后，检查检查程序编译是否成功::
+
+    $ ls ./bin/                           
+    xadj_seismogram               xcombine_sem                  xmeshfem2D                    xspecfem2D
+    xcheck_quality_external_mesh  xconvolve_source_timefunction xsmooth_sem                   xsum_kernels
 
 
 .. _developer:

@@ -47,8 +47,11 @@ source_suffix = '.rst'
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
 
+# Language selected. 'cn' and 'en' are currently supported.
+lang = 'cn'
+
 # The master toctree document.
-master_doc = 'index'
+master_doc = 'index_' + lang
 
 # General information about the project.
 project = u'SeisFlows'
@@ -210,10 +213,17 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-  ('index', 'SeisFlows.tex', u'SeisFlows Documentation',
-   u'', 'manual'),
-]
+if lang == 'cn':
+  latex_documents = [
+    ('index_' + lang, 'SeisFlows.tex', u'SeisFlows用户手册',
+    u'', 'manual'),
+  ]
+elif lang == 'en':
+  latex_documents = [
+    ('index_' + lang, 'SeisFlows.tex', u'SeisFlows Documentation',
+    u'', 'manual'),
+  ]
+
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
@@ -240,10 +250,16 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    ('index', 'seisflows', u'SeisFlows Documentation',
-     [u'Princeton University'], 1)
-]
+if lang == 'cn':
+  man_pages = [
+      ('index_'+lang, 'seisflows', u'SeisFlows用户手册',
+      [u'Princeton University'], 1)
+  ]
+elif lang == 'en':
+    man_pages = [
+      ('index_'+lang, 'seisflows', u'SeisFlows Documentation',
+      [u'Princeton University'], 1)
+  ]
 
 # If true, show URL addresses after external links.
 #man_show_urls = False
